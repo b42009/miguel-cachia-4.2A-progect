@@ -1,0 +1,34 @@
+
+    body
+    {
+
+        background:#1d1d1d;
+    }
+#ime{
+         display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+
+    }
+h4{text-align: center;
+color: beige;}
+#back{
+    height: 44vh;
+}
+#ev{
+    padding-top: 1%;
+
+}
+#ev:hover{
+    background-color: #505051;
+
+}
+#drop{
+    
+    background-color:#1d1d1d;
+    color: white;
+    width: 20vw;
+ 
+}
+#show{width: 2%;}
