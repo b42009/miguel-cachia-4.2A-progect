@@ -2,7 +2,7 @@
 error_reporting(0);
 session_start();
  $id = $_GET['id'];
- $conn = mysqli_connect('localhost', 'root', '', 'events','3307')  or die('Cannot 123 connect to db');
+ $conn = mysqli_connect('localhost', 'root', '', 'events')  or die('Cannot 123 connect to db');
     $query = "select event.eventId,event.name,event.eventDate,event.imagLink,event.addres,event.durationInDays,eventtypes.typeName
     from event 
     INNER JOIN eventtypes ON event.type = eventtypes.typeId
@@ -13,7 +13,7 @@ session_start();
     
     
     
-    
+    $row = mysqli_fetch_assoc($result);
 
 ?>
 
@@ -30,16 +30,14 @@ session_start();
 </head>
 <body>
    <nav class="navbar navbar-expand-lg navbar-light bg-light  navbar navbar-dark bg-dark">
-  <a class="navbar-brand" href="#">Navbar</a>
+  <a class="navbar-brand" style="color :#00FFFF;" href="http://localhost/fpage.php">Let's book!</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-      </li>
+      
       <li class="nav-item">
         <a class="nav-link" href="#">News</a>
       </li>
@@ -51,29 +49,53 @@ session_start();
       </li>
       
       
-      <li class="nav-item dropdown" style="float: right;">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          logIn/Creat acaunt
-        </a>
-        <div id="drop" class="dropdown-menu" aria-labelledby="navbarDropdown">
-         
-    <form class="form-inline" action="/action_page.php">
-        <div class="form-group">
-          <label for="email">Username</label><br>
-          <input type="text" class="form-control" id="username" placeholder="Enter Usename" name="email">
-        </div>
-        <div class="form-group">
-          <label for="pwd">Password:</label>
-          <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pwd">
-        </div><br>
-        
-        <button type="submit" style="margin-left:  30%;" class="btn btn-default">Submit</button>
-        <br>
-        <a href="">Forgot password</a>
-  </form>
-          
-        </div>
-      </li>
+           <?php
+            if (isset($_SESSION["login"])){
+                $idu=$_SESSION['login'];
+                 $logquery = "select clientName from client WHERE clientId =$idu ";
+                $logresult =mysqli_query($conn, $logquery)or die ("Error in query" . mysqli_error($conn));
+                $logrow = mysqli_fetch_assoc($logresult);
+                
+                 echo'<li class="nav-item dropdown" style="float: right;">';
+                echo'<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">';
+                echo'hello '. $logrow[clientName];
+                echo'</a>';
+            echo'<div id="drop" class="dropdown-menu" aria-labelledby="navbarDropdown">';
+               echo"<h4><a href='http://localhost/logout.php?page=logout.php?&id=$id&page=showpage.php&cata=2'>LogOut</a></h4>";
+               echo' </div>';
+                echo'</li>';
+            }
+            else{ 
+                echo'<li class="nav-item dropdown" style="float: right;">';
+                echo'<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">';
+                echo'logIn/Creat acaunt';
+                echo'</a>';
+            echo'<div id="drop" class="dropdown-menu" aria-labelledby="navbarDropdown">';
+                echo'<form class="form-inline" method="post" action="loginp.php">';
+                    echo'<div class="form-group">';
+                     echo'<label for="email">Username</label><br>';
+                     echo' <input type="text" class="form-control" id="username" placeholder="Enter Usename" name="username">';
+                    echo'</div>';
+                   echo' <div class="form-group">';
+                     echo' <label for="pwd">Password:</label>';
+                     echo' <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pwd">';
+                   echo' </div><br>';
+                 if (isset($_SESSION["logwor"])){
+                     $mess = $_SESSION["logwor"];
+                     echo'<mark>'.$mess.'</mark>';
+                 }
+                   echo' <button type="submit" style="margin-left:  30%;" class="btn btn-default">Submit</button>';
+                   echo' <br>';
+                   echo' <a href="">Forgot password</a>';
+                  echo  "<input type='text' style='visibility: hidden' value='$date' name='date'>";
+                echo  "<input type='text' style='visibility: hidden' value='showpage.php' name='page'>";
+                echo  "<input type='text' style='visibility: hidden' value='2' name='cata'>";
+                 echo  "<input type='text' style='visibility: hidden' value='$id' name='idi'>";
+             echo'</form>';
+               echo' </div>';
+                echo'</li>';
+            }
+            ?>
     </ul>
     
     <form class="form-inline my-2 my-lg-0">
@@ -111,7 +133,7 @@ session_start();
 <body class="container-fluid">
 <?php
     
-    $row = mysqli_fetch_assoc($result);
+    
      
     
    
@@ -142,7 +164,7 @@ session_start();
                           echo"<h5   class='col-sm-12 col-md-7 col-lg-7'>Date :$dai </h5>";
 
                         
-                                     echo"<button  class='col-sm-12 col-md-2 col-lg-2'><a href='http://localhost:8084/selectticket.php?date=$dai&id=$id' style:'text-decoration: none'>select</a></button>";
+                                     echo"<button  class='col-sm-12 col-md-2 col-lg-2'><a href='http://localhost/selectticket.php?date=$dai&id=$id' style:'text-decoration: none'>select</a></button>";
                                       
 
                                       echo"</div>";
