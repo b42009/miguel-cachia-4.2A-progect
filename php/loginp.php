@@ -17,22 +17,41 @@ echo $num;
      echo"not";
      $_SESSION["logwor"] = "LogIn failed rety.";
     
+    if($ca == 1){
+        $_SESSION["login"] = $row[clientId];
+        unset($_SESSION["buywor"]);
+       header('Location:http://localhost/'.$page);
+    
+    }
+    elseif($ca == 2){
+        $_SESSION["login"] = $row[clientId];
+        unset($_SESSION["buywor"]);
+         header('Location:http://localhost/'.$page.'?id='.$id);
+}
+    elseif($ca ==3){
+         $_SESSION["login"] = $row[clientId];
+        unset($_SESSION["buywor"]);
+        header('Location:http://localhost/'.$page.'?date='.$datei.'&id='.$id);}
+    
+    
  }
 else{
     $row = mysqli_fetch_assoc($result);
   
     if($ca == 1){
         $_SESSION["login"] = $row[clientId];
+        unset($_SESSION["buywor"]);
        header('Location:http://localhost/'.$page);
     
     }
     elseif($ca == 2){
         $_SESSION["login"] = $row[clientId];
+        unset($_SESSION["buywor"]);
          header('Location:http://localhost/'.$page.'?id='.$id);
 }
     elseif($ca ==3){
          $_SESSION["login"] = $row[clientId];
-
+        unset($_SESSION["buywor"]);
         header('Location:http://localhost/'.$page.'?date='.$datei.'&id='.$id);}
     
     
