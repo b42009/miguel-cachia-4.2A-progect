@@ -10,15 +10,12 @@ if($ca ==1){
 }
 elseif($ca == 2){
      session_destroy();
-
+echo "Localhost/".$page;
+echo $datei;
 header('Location:http://localhost/'.$page.'?id='.$id);
-}else{
+}elseif($ca ==3){
  session_destroy();
 echo "Localhost/".$page;
 echo $datei;
-    echo $id;
-header('Location:http://localhost/'.$page.'?date='.$datei.'&id='.$id);
-}
-
-
+header('Location:http://localhost/'.$page.'?date='.$datei.'&id='.$id);}
 ?>

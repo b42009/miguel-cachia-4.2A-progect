@@ -170,11 +170,8 @@ session_start();
                            $q=1;    
                             
                             echo"<p>";
-                             $nquery ="select tiketId from ticket where eventId = $id and edate ='$date' and classType = $crow[classId] and cliantId IS NULL";
-                            $nresult =mysqli_query($conn, $nquery) or die ("Error in query" . mysqli_error($conn));
-                                    $rows = mysqli_num_rows($nresult);
+                            
                            
-                            if(mysqli_num_rows($nresult)>0){
                             echo"<div class='container' style=' width: 100%; background-color: #A9A9A9;#A9A9A9' >";
                      echo"<form  method='post' action='buyform.php' class='container-fluid'>";
                             echo  "<input type='text' style='visibility: hidden' value='$date' name='date'>";
@@ -187,13 +184,15 @@ session_start();
                              $tresult =mysqli_query($conn, $tquery)or die ("Error in query" . mysqli_error($conn));
                                                          
                             echo"<select style='object-position: center; ' class='col-sm-12 col-md-3 col-lg-3' name='not'>";
-                                   
+                                    $nquery ="select tiketId from ticket where eventId = $id and edate ='$date' and classType = $crow[classId] and cliantId IS NULL";
 
-                                    
-                                    
+                                     $nresult =mysqli_query($conn, $nquery)
+                                                    or die ("Error in query" . mysqli_error($conn));
+                                    $rows = mysqli_num_rows($nresult);
+
                             $count = 1;
                             
-                                while ($count <$rows)   {             
+                                while ($count <=$rows)   {             
                                       echo"<option value='$count'>$count</option>";
                                        
                                           $count = $count +1;
@@ -209,34 +208,11 @@ session_start();
                                                       
                     echo"<button type='submit'>Buy</button>";
                             
-                                     
-                              echo  "<input type='text' style='visibility: hidden' value='$date' name='date'>";
-                echo  "<input type='text' style='visibility: hidden' value='selectticket.php' name='page'>";
-                echo  "<input type='text' style='visibility: hidden' value='3' name='cata'>";
-                 echo  "<input type='text' style='visibility: hidden' value='$id' name='id'>";
+                                      echo  "<input type='text' style='visibility: hidden' value='$id' name='idi'>";
 
                                       echo"</div>";
                                   echo"</form>";
-                                  echo"</div>"; 
-                            }else{
-                                echo"<div class='container' style=' width: 100%; background-color: #A9A9A9;#A9A9A9' >";
-                     echo"<form  method='post' action='buyform.php' class='container-fluid'>";
-                            echo  "<input type='text' style='visibility: hidden' value='$date' name='date'>";
-                            echo  "<input type='text' style='visibility: hidden' value='$crow[classId]' name='class'>";
-                            echo"<div class='row'>";
-                          echo"<h5 class='col-sm-12 col-md-7 col-lg-7' name='clas'>type:$crow[className] Price :€$crow[price]</h5>";
-                            
-                        echo "<h5 class='col-sm-12 col-md-3 col-lg-3'>Sorry this is fully booked</h5>";
-                                                         
-                            
-                            
-                                     
-                             
-
-                                      echo"</div>";
-                                  echo"</form>";
-                                  echo"</div>";
-                            } 
+                                  echo"</div>";  
                             
                             
                             
