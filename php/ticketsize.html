@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+ 
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+
+</head>
+<body>
+   
+   <div class='container'>
+    <div class='row'>
+       
+            <div  style='border-style: solid; 'class='col-sm-12 col-md-12 col-lg-12' >
+
+              <div class='container'>
+                  <div class='row'>
+                  <div class='col-sm-4 col-md-4 col-lg-4' ><img  class='img-thumbnail' style='height:300px;width: 220px;'src='uploads\pl1.jpg' alt='Event Poster'> </div>
+                  <div class='col-sm-4 col-md-4 col-lg-4'style="float: left">
+                      <H2>$row[name] </H2><p></p>
+                      <hr style='border-top: dotted 3px;' />
+                      <h4 >type:$crow[className] </h4><h4>Addres: $row[addres]</h4><h4>date and time:  <br>$row[edate]. $row[timeStart]</h4><h2>Price:€ $row[price]</h2><p>$row[tiketCode]</p>
+
+                                          </div>
+
+                                    <img class='col-sm-4 col-md-4 col-lg-4' src='https://api.qrserver.com/v1/create-qr-code/?data=($row[tiketCode])&size=200x200' style= 'padding-left: 90px'> 
+                                      </div> 
+
+                </div>
+              </div> 
+                           
+        </div>
+    </div>
+             
+              
+              
+    
+</body>
+</html>

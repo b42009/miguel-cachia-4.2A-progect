@@ -19,11 +19,15 @@ F:\proget\project\project\obj\Debug\project.Properties.Resources.resources
 F:\proget\project\project\obj\Debug\project.csproj.GenerateResource.Cache
 F:\proget\project\project\obj\Debug\project.exe
 F:\proget\project\project\obj\Debug\project.pdb
-I:\proget\project\project\obj\Debug\project.csprojResolveAssemblyReference.cache
-I:\proget\project\project\obj\Debug\project.Form1.resources
 I:\proget\project\project\obj\Debug\project.home.resources
 I:\proget\project\project\obj\Debug\project.login.resources
 I:\proget\project\project\obj\Debug\project.Properties.Resources.resources
 I:\proget\project\project\obj\Debug\project.csproj.GenerateResource.Cache
 I:\proget\project\project\obj\Debug\project.exe
 I:\proget\project\project\obj\Debug\project.pdb
+I:\proget\project\project\bin\Debug\project.exe.config
+I:\proget\project\project\bin\Debug\project.exe
+I:\proget\project\project\bin\Debug\project.pdb
+I:\proget\project\project\bin\Debug\MySql.Data.dll
+I:\proget\project\project\bin\Debug\MySql.Data.xml
+I:\proget\project\project\obj\Debug\project.csprojResolveAssemblyReference.cache

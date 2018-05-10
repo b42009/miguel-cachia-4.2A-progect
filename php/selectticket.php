@@ -3,6 +3,8 @@ error_reporting(0);
 session_start();
  $date = $_GET['date'];
  $id = $_GET['id'];
+if(!isset($id) ||!isset($date)|| $id == null || $date == null){header('Location:fpage.php');}
+
  $conn = mysqli_connect('localhost', 'root', '', 'events')  or die('Cannot 123 connect to db');
     $cquery = "select DISTINCT class.className , class.classId ,ticket.price From ticket INNER JOIN class ON ticket.classType = class.classId where eventId = $id and edate= '$date' ";
     $cresult =mysqli_query($conn, $cquery)
@@ -14,15 +16,9 @@ session_start();
     where event.eventId = '$id' ";
     $result =mysqli_query($conn, $query)
                 or die ("Error in query" . mysqli_error($conn));
-
-
-
-
-  
-    
-    
-    
-    
+ $ron = mysqli_num_rows($result);
+ if( $ron == '0' ){
+        header('Location:http://localhost/fpage.php'); echo "34";} 
 
 ?>
 
@@ -48,13 +44,29 @@ session_start();
     <ul class="navbar-nav mr-auto">
      
       <li class="nav-item">
-        <a class="nav-link" href="#">News</a>
+        <a class="nav-link" href="new.php">News</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#">Contact Us</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#">About</a>
+      </li>
+       <li>
+          <div class="dropdown">
+  <button class="btn btn-dark" style="background-color#424242 ;"
+     data-toggle="dropdown"  >
+    Event Type Serch
+  </button>
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+   <?php
+      $typeq="select DISTINCT typeName from eventtypes INNER JOIN EVENT ON event.type = eventtypes.typeId";
+       $typer =mysqli_query($conn, $typeq)or die ("Error in query" . mysqli_error($conn));
+      while($row = mysqli_fetch_assoc($typer)) {
+    echo'<a class="dropdown-item" href="typeserch.php?type='.$row[typeName].'">'.$row[typeName].'</a>';
+        } ?>
+  </div>
+</div>
       </li>
       
       
@@ -65,7 +77,9 @@ session_start();
                 $logresult =mysqli_query($conn, $logquery)or die ("Error in query" . mysqli_error($conn));
                 $logrow = mysqli_fetch_assoc($logresult);
                 
-                
+                 echo' <li class="nav-item">';
+                echo'<a class="nav-link" href="ticketeventselecter.php">View Tickets</a>';
+              echo'</li>';
                  echo'<li class="nav-item dropdown" style="float: right;">';
                 echo'<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">';
                 echo'hello '. $logrow[clientName];
@@ -76,13 +90,22 @@ session_start();
                 echo'</li>';
             }
             else{ 
-                echo'<li class="nav-item dropdown" style="float: right;">';
-                echo'<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">';
-                echo'logIn/Creat acaunt';
-                echo'</a>';
-            echo'<div id="drop" class="dropdown-menu" aria-labelledby="navbarDropdown">';
-                echo'<form class="form-inline" method="post" action="loginp.php">';
-                    echo'<div class="form-group">';
+                echo'<button type="button" class="btn btn-dark" data-toggle="modal" data-target="#exampleModal" style="background-color#424242 ; ">';
+ echo' Login/Sghn up';
+echo'</button>';
+                
+               echo'<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"'; echo'aria-labelledby="exampleModalLabel" aria-hidden="true">';
+ echo' <div class="modal-dialog" role="document ">';
+    echo'<div class="modal-content">';
+      echo'<div class="modal-header">';
+        echo'<h5 class="modal-title" id="exampleModalLabel">LogIn</h5>';
+       echo' <button type="button" class="close" data-dismiss="modal" aria-label="Close">';
+          echo'<span aria-hidden="true">&times;</span>';
+       echo' </button>';
+      echo'</div>';
+      echo'<div class="modal-body">';
+                                echo'<form  method="post" action="loginp.php">';
+        echo'<div class="form-group">';
                      echo'<label for="email">Username</label><br>';
                      echo' <input type="text" class="form-control" id="username" placeholder="Enter Usename" name="username">';
                     echo'</div>';
@@ -93,25 +116,29 @@ session_start();
                  if (isset($_SESSION["logwor"])){
                      $mess = $_SESSION["logwor"];
                      echo'<mark>'.$mess.'</mark>';
-                 }
-                   echo' <button type="submit" style="margin-left:  30%;" class="btn btn-default">Submit</button>';
+                 }echo' </div>';
+                   echo' <input type="submit" class="btn btn-default" value="Log In">';
                    echo' <br>';
                    echo' <a href="">Forgot password</a>';
+                 echo'<a href="accauntform.php">Sing Up</a>';
                 echo  "<input type='text' style='visibility: hidden' value='$date' name='date'>";
                 echo  "<input type='text' style='visibility: hidden' value='selectticket.php' name='page'>";
                 echo  "<input type='text' style='visibility: hidden' value='3' name='cata'>";
                  echo  "<input type='text' style='visibility: hidden' value='$id' name='idi'>";
              echo'</form>';
-               echo' </div>';
-                echo'</li>';
+      echo"</div>";
+      
+    echo"</div>";
+  echo"</div>";
+echo"</div>";
             }
             ?>
     </ul>
     
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+ <form class="form-inline my-2 my-lg-0" action="serch.php" method="post">
+      <input class="form-control mr-sm-2" type="search" name='serch'>
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
+      </form>
   </div>
 </nav>
 <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
@@ -142,13 +169,11 @@ session_start();
 </div>
 <body class="container-fluid">
 <?php
-    
-    
-     
-    
    
+  
+    
   $row = mysqli_fetch_assoc($result);
-                
+             
  echo "<div class='jumbotron' style='background-color:#808080; width:80%;    margin-left: 10%; margin-top: 2%;'>";
           
           echo"<div class='container'>";
@@ -170,8 +195,11 @@ session_start();
                            $q=1;    
                             
                             echo"<p>";
-                            
+                             $nquery ="select tiketId from ticket where eventId = $id and edate ='$date' and classType = $crow[classId] and cliantId IS NULL";
+                            $nresult =mysqli_query($conn, $nquery) or die ("Error in query" . mysqli_error($conn));
+                                    $rows = mysqli_num_rows($nresult);
                            
+                            if(mysqli_num_rows($nresult)>1){
                             echo"<div class='container' style=' width: 100%; background-color: #A9A9A9;#A9A9A9' >";
                      echo"<form  method='post' action='buyform.php' class='container-fluid'>";
                             echo  "<input type='text' style='visibility: hidden' value='$date' name='date'>";
@@ -184,12 +212,10 @@ session_start();
                              $tresult =mysqli_query($conn, $tquery)or die ("Error in query" . mysqli_error($conn));
                                                          
                             echo"<select style='object-position: center; ' class='col-sm-12 col-md-3 col-lg-3' name='not'>";
-                                    $nquery ="select tiketId from ticket where eventId = $id and edate ='$date' and classType = $crow[classId] and cliantId IS NULL";
+                                   
 
-                                     $nresult =mysqli_query($conn, $nquery)
-                                                    or die ("Error in query" . mysqli_error($conn));
-                                    $rows = mysqli_num_rows($nresult);
-
+                                    
+                                    
                             $count = 1;
                             
                                 while ($count <=$rows)   {             
@@ -208,18 +234,41 @@ session_start();
                                                       
                     echo"<button type='submit'>Buy</button>";
                             
-                                      echo  "<input type='text' style='visibility: hidden' value='$id' name='idi'>";
+                                     
+                              echo  "<input type='text' style='visibility: hidden' value='$date' name='date'>";
+                echo  "<input type='text' style='visibility: hidden' value='selectticket.php' name='page'>";
+                echo  "<input type='text' style='visibility: hidden' value='3' name='cata'>";
+                 echo  "<input type='text' style='visibility: hidden' value='$id' name='id'>";
 
                                       echo"</div>";
                                   echo"</form>";
-                                  echo"</div>";  
+                                  echo"</div>"; 
+                            }else{
+                                echo"<div class='container' style=' width: 100%; background-color: #A9A9A9;#A9A9A9' >";
+                     echo"<form  method='post' action='buyform.php' class='container-fluid'>";
+                            echo  "<input type='text' style='visibility: hidden' value='$date' name='date'>";
+                            echo  "<input type='text' style='visibility: hidden' value='$crow[classId]' name='class'>";
+                            echo"<div class='row'>";
+                          echo"<h5 class='col-sm-12 col-md-7 col-lg-7' name='clas'>type:$crow[className] Price :€$crow[price]</h5>";
+                            
+                        echo "<h5 class='col-sm-12 col-md-3 col-lg-3'>Sorry this is fully booked</h5>";
+                                                         
+                           
+                            
+                                     
+                             
+
+                                      echo"</div>";
+                                  echo"</form>";
+                                  echo"</div>";
+                            } 
                             
                             
                             
                             
                             }
 
-                        
+   
                               echo"</div>";
  
    
@@ -228,7 +277,7 @@ session_start();
        echo"</div>";
        echo"</div>";
 
-
+   
        ?>
     </body>
  

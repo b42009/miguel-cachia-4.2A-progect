@@ -1,26 +1,15 @@
 <?php
 error_reporting(0);
-session_start();
- $id= $_GET['id'];
-$see=$_GET['see'];
-if(!isset($id) || $id == null){header('Location:http://localhost/fpage.php');}
-else{
+    session_start();
+
+    $conn = mysqli_connect('localhost', 'root', '', 'events') or die('Cannot connect to db');
+    $query = "select eventId,name, eventDate,imagLink from event WHERE imgcategory='1' and eventDate >= CURDATE() ORDER BY eventDate asc";
+    $result =mysqli_query($conn, $query)or die ("Error in query" . mysqli_error($conn));
 
 
- $conn = mysqli_connect('localhost', 'root', '', 'events')  or die('Cannot 123 connect to db');
-    $query = "select event.eventId,event.name,event.eventDate,event.imagLink,event.addres,event.durationInDays,eventtypes.typeName
-    from event 
-    INNER JOIN eventtypes ON event.type = eventtypes.typeId
-    where event.eventId = '$id' ";
-    $result =mysqli_query($conn, $query)
-                or die ("Error in query" . mysqli_error($conn));
-  
     
-    if(mysqli_num_rows($result)==0){header('Location:http://localhost/fpage.php');}
-    
-    $row = mysqli_fetch_assoc($result);
-
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -44,7 +33,7 @@ else{
     <ul class="navbar-nav mr-auto">
       
       <li class="nav-item">
-        <a class="nav-link" href="#">News</a>
+        <a class="nav-link" href="new.php">News</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#">Contact Us</a>
@@ -52,45 +41,30 @@ else{
       <li class="nav-item">
         <a class="nav-link" href="#">About</a>
       </li>
-       <li>
-          <div class="dropdown">
-  <button class="btn btn-dark" style="background-color#424242 ;"
-     data-toggle="dropdown"  >
-    Event Type Serch
-  </button>
-  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-   <?php
-      $typeq="select DISTINCT typeName from eventtypes INNER JOIN EVENT ON event.type = eventtypes.typeId";
-       $typer =mysqli_query($conn, $typeq)or die ("Error in query" . mysqli_error($conn));
-      while($rrow = mysqli_fetch_assoc($typer)) {
-    echo'<a class="dropdown-item" href="typeserch.php?type='.$rrow[typeName].'">'.$rrow[typeName].'</a>';
-        } ?>
-  </div>
-</div>
-      </li>
       
       
       
-       <?php
+      
+         <?php
             if (isset($_SESSION["login"])){
-                $idu=$_SESSION['login'];
-                 $logquery = "select clientName from client WHERE clientId =$idu ";
+                $id=$_SESSION['login'];
+                 $logquery = "select clientName from client WHERE clientId =$id ";
     $logresult =mysqli_query($conn, $logquery)or die ("Error in query" . mysqli_error($conn));
                 $logrow = mysqli_fetch_assoc($logresult);
-                 echo' <li class="nav-item">';
+                echo' <li class="nav-item">';
                 echo'<a class="nav-link" href="ticketeventselecter.php">View Tickets</a>';
               echo'</li>';
                  echo'<li class="nav-item dropdown" style="float: right;">';
                 echo'<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">';
                 echo'hello '. $logrow[clientName];
                 echo'</a>';
-           echo'<div id="drop" class="dropdown-menu" aria-labelledby="navbarDropdown">';
-               echo"<h4><a href='http://localhost/logout.php?page=logout.php?&id=$id&page=showpage.php&cata=2'>LogOut</a></h4>";
+            echo'<div id="drop" class="dropdown-menu" aria-labelledby="navbarDropdown">';
+              echo"<h4><a href='http://localhost/logout.php?page=logout.php?&page=new.php&cata=4'>LogOut</a></h4>";
                echo' </div>';
                 echo'</li>';
-               
             }
            else{ 
+              
                 echo'<button type="button" class="btn btn-dark" data-toggle="modal" data-target="#exampleModal" style="background-color#424242 ; ">';
                   echo'Login/Sghn up';
                 echo'</button>';
@@ -105,7 +79,7 @@ else{
        echo' </button>';
       echo'</div>';
       echo'<div class="modal-body">';
-        echo'<form  method="post" action="loginp.php">';
+        echo'<form class="form-inline" method="post" action="loginp.php">';
                     echo'<div class="form-group">';
                      echo'<label for="email">Username</label><br>';
                      echo' <input type="text" class="form-control" id="username" placeholder="Enter Usename" name="username">';
@@ -123,10 +97,10 @@ else{
                    echo' <br>';
                    echo' <a href="">Forgot password</a><p>';
                 echo'<a href="accauntform.php">Sing Up</a>';
-                  echo  "<input type='text' style='visibility: hidden' value='$date' name='date'>";
-                echo  "<input type='text' style='visibility: hidden' value='showpage.php' name='page'>";
-                echo  "<input type='text' style='visibility: hidden' value='2' name='cata'>";
-                 echo  "<input type='text' style='visibility: hidden' value='$id' name='idi'>";
+                 
+                echo  "<input type='text' style='visibility: hidden' value='new.php' name='page'>";
+                echo  "<input type='text' style='visibility: hidden' value='4' name='cata'>";
+                
              echo'</form>';
       echo"</div>";
       
@@ -136,6 +110,9 @@ echo"</div>";
                
             }
             ?>
+   
+          
+        
     </ul>
     
     <form class="form-inline my-2 my-lg-0" action="serch.php" method="post">
@@ -171,89 +148,30 @@ echo"</div>";
   </a>
 </div>
 <body class="container-fluid">
-<?php
-    
-    
-     
-    
-   
-  
-                
- echo "<div class='jumbotron' style='background-color:#808080; width:80%;    margin-left: 10%; margin-top: 2%;'>";
-          
-          echo"<div class='container'>";
-              echo"<div class='row'>";
-              echo "<div class='col-sm-12 col-md-4 col-lg-4' ><img  class='img-thumbnail' style='width:25vh;'src='$row[imagLink]' alt='Event Poster'  ></div>";
-              echo "<div class='col-sm-12 col-md-8 col-lg-8'>";
-                  echo"<H2>$row[name] </H2><p></p>";
-                  echo"<hr style='border-top: dotted 3px;' />";
-                  echo"<p>type:$row[typeName] </p><p>Addres: $row[addres]</p>";
-                  
-                        @$da = new DateTime($row[eventDate]);
-                            $da->modify('-1 day');
-                        if($see == 1){
-                        for($z = 1;$z<=$row[durationInDays];$z++){
-                              $datrow = mysqli_fetch_assoc($datresult);
-                            $da->modify('+1 day');
-                               $dai =  date_format($da, 'Y-m-d');
-                           
-                           echo"<p>";
-                            echo"<div class='container' style=' width: 100%; background-color: #A9A9A9;#A9A9A9' >";
-                     echo"<form  method='post' action='' class='container-fluid'>";
-                          echo"<div class='row'>";
-                          echo"<h5   class='col-sm-12 col-md-7 col-lg-7'>Date :$dai </h5>";
 
-                        
-                                     echo"<button  class='col-sm-12 col-md-2 col-lg-2'><a href='http://localhost/selectticket.php?date=$dai&id=$id' style:'text-decoration: none'>select</a></button>";
-                                      
+        <div class="row">
+         <?php
+               while($row = mysqli_fetch_assoc($result)) {
+                   
+                   
+                   
+                echo " <div id='ev' class='col-sm-12 col-md-4 col-lg-2'><a href='http://localhost/showpage.php?id=$row[eventId]&see=1' style:'text-decoration: none'>";
+             
+              echo "<img id='ime' src=$row[imagLink]>";
+              echo "<h4 >$row[name] </h4>";
+            echo"<p style = 'color: white;'>$row[eventDate]</p>";    
 
-                                      echo"</div>";
-                                  echo"</form>";
-                                  echo"</div>";  
-                            
-                            
-                            
-                            
-                            }}
-     if($see == 2){
-                        for($z = 1;$z<=$row[durationInDays];$z++){
-                              $datrow = mysqli_fetch_assoc($datresult);
-                            $da->modify('+1 day');
-                               $dai =  date_format($da, 'Y-m-d');
-                           
-                           echo"<p>";
-                            echo"<div class='container' style=' width: 100%; background-color: #A9A9A9;#A9A9A9' >";
-                     echo"<form  method='post' action='' class='container-fluid'>";
-                          echo"<div class='row'>";
-                          echo"<h5   class='col-sm-12 col-md-7 col-lg-7'>Date :$dai </h5>";
-
-                        
-                                     echo"<button  class='col-sm-12 col-md-2 col-lg-2'><a href='http://localhost/ticketview.php?date=$dai&eventid=$id&see=1' style:'text-decoration: none'>select</a></button>";
-                                      
-
-                                      echo"</div>";
-                                  echo"</form>";
-                                  echo"</div>";  
-                            
-                            
-                            
-                            
-                            }}
-                        
-                              echo"</div>";
- 
-   
-   
-       echo"</div>";
-       echo"</div>";
-       echo"</div>";
+           echo '</a></div>';
+               }              
+            ?>
+         
+         
+         
+           
 
 
-       ?>
+        </div>
     </body>
  
 </body>
 </html>
-<?php
-}
-?>

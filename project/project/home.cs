@@ -12,8 +12,11 @@ namespace project
 {
     public partial class home : Form
     {
-        public home()
+        string clientid1;
+
+        public home(string clientid)
         {
+            this.clientid1 = clientid;
             InitializeComponent();
         }
 

@@ -1,7 +1,7 @@
 <?php
 error_reporting(0);
     session_start();
-
+    #connecting to db
     $conn = mysqli_connect('localhost', 'root', '', 'events') or die('Cannot connect to db');
     $query = "select eventId,name, eventDate,imagLink from event WHERE imgcategory='1' and eventDate >= CURDATE();";
     $result =mysqli_query($conn, $query)or die ("Error in query" . mysqli_error($conn));
@@ -33,7 +33,7 @@ error_reporting(0);
     <ul class="navbar-nav mr-auto">
       
       <li class="nav-item">
-        <a class="nav-link" href="new.php">News</a>
+        <a class="nav-link" href="#">News</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#">Contact Us</a>
@@ -41,23 +41,9 @@ error_reporting(0);
       <li class="nav-item">
         <a class="nav-link" href="#">About</a>
       </li>
-      <li>
-          <div class="dropdown">
-  <button class="btn btn-dark" style="background-color#424242 ;"
-     data-toggle="dropdown"  >
-    Event Type Serch
-  </button>
-  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-   <?php
-      $typeq="select DISTINCT typeName from eventtypes INNER JOIN EVENT ON event.type = eventtypes.typeId";
-       $typer =mysqli_query($conn, $typeq)or die ("Error in query" . mysqli_error($conn));
-      while($row = mysqli_fetch_assoc($typer)) {
-    echo'<a class="dropdown-item" href="typeserch.php?type='.$row[typeName].'">'.$row[typeName].'</a>';
-        } ?>
-  </div>
-</div>
-      </li>
-      
+      <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#exampleModal" style="background-color#424242 ; ">
+  Login/Sghn up
+</button>
       
       
       
@@ -67,9 +53,7 @@ error_reporting(0);
                  $logquery = "select clientName from client WHERE clientId =$id ";
     $logresult =mysqli_query($conn, $logquery)or die ("Error in query" . mysqli_error($conn));
                 $logrow = mysqli_fetch_assoc($logresult);
-                echo' <li class="nav-item">';
-                echo'<a class="nav-link" href="ticketeventselecter.php">View Tickets</a>';
-              echo'</li>';
+                
                  echo'<li class="nav-item dropdown" style="float: right;">';
                 echo'<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">';
                 echo'hello '. $logrow[clientName];
@@ -79,11 +63,7 @@ error_reporting(0);
                echo' </div>';
                 echo'</li>';
             }
-           else{ 
-              
-                echo'<button type="button" class="btn btn-dark" data-toggle="modal" data-target="#exampleModal" style="background-color#424242 ; ">';
-                  echo'Login/Sghn up';
-                echo'</button>';
+            else{ 
                 echo'<li class="nav-item dropdown" style="float: right;">';
                echo'<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"'; echo'aria-labelledby="exampleModalLabel" aria-hidden="true">';
  echo' <div class="modal-dialog" role="document ">';
@@ -95,27 +75,24 @@ error_reporting(0);
        echo' </button>';
       echo'</div>';
       echo'<div class="modal-body">';
-        echo'<form class="form-inline" method="post" action="loginp.php">';
-                    echo'<div class="form-group">';
+        echo'<div class="form-group">';
                      echo'<label for="email">Username</label><br>';
                      echo' <input type="text" class="form-control" id="username" placeholder="Enter Usename" name="username">';
                     echo'</div>';
                    echo' <div class="form-group">';
                      echo' <label for="pwd">Password:</label>';
                      echo' <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pwd">';
-                   echo' </div>';
-                
+                   echo' </div><br>';
                  if (isset($_SESSION["logwor"])){
                      $mess = $_SESSION["logwor"];
                      echo'<mark>'.$mess.'</mark>';
-                 }echo' </div>';
-                   echo' <input type="submit" class="btn btn-default" value="Log In">';
+                 }
+                   echo' <button type="submit" style="margin-left:  30%;" class="btn btn-default">Submit</button>';
                    echo' <br>';
-                   echo' <a href="">Forgot password</a><p>';
-                echo'<a href="accauntform.php">Sing Up</a>';
-                  echo  "<input type='text' style='visibility: hidden' value='$date' name='date'>";
-                echo  "<input type='text' style='visibility: hidden' value='fpage.php' name='page'>";
-                echo  "<input type='text' style='visibility: hidden' value='1' name='cata'>";
+                   echo' <a href="">Forgot password</a>';
+                echo  "<input type='text' style='visibility: hidden' value='$date' name='date'>";
+                echo  "<input type='text' style='visibility: hidden' value='selectticket.php' name='page'>";
+                echo  "<input type='text' style='visibility: hidden' value='3' name='cata'>";
                  echo  "<input type='text' style='visibility: hidden' value='$id' name='idi'>";
              echo'</form>';
       echo"</div>";
@@ -131,8 +108,8 @@ echo"</div>";
         
     </ul>
     
-    <form class="form-inline my-2 my-lg-0" action="serch.php" method="post">
-      <input class="form-control mr-sm-2" type="search" name='serch'>
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
     </form>
   </div>
@@ -171,7 +148,7 @@ echo"</div>";
                    
                    
                    
-                echo " <div id='ev' class='col-sm-12 col-md-4 col-lg-2'><a href='http://localhost/showpage.php?id=$row[eventId]&see=1' style:'text-decoration: none'>";
+                echo " <div id='ev' class='col-sm-12 col-md-4 col-lg-2'><a href='http://localhost/showpage.php?id=$row[eventId]' style:'text-decoration: none'>";
              
               echo "<img id='ime' src=$row[imagLink]>";
               echo "<h4 >$row[name] </h4>";
