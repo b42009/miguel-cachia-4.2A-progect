@@ -6,6 +6,7 @@ $id = $_GET["id"];
 $ca = $_GET["cata"];
 $inp = $_POST["serch"];
 $type =$_POST["type"];
+$see=$_GET["see"];
 
 if($ca ==1){
     session_destroy();
@@ -14,7 +15,7 @@ if($ca ==1){
 elseif($ca == 2){
      session_destroy();
 
-header('Location:http://localhost/'.$page.'?id='.$id);
+header('Location:http://localhost/'.$page.'?id='.$id.'&see='.$see);
 }
 
 elseif($ca == 4){

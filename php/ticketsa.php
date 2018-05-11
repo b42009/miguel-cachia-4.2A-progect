@@ -1,12 +1,15 @@
 <?php
 error_reporting(0);
     session_start();
-
-    $conn = mysqli_connect('localhost', 'root', '', 'events') or die('Cannot connect to db');
-    $query = "select eventId,name, eventDate,imagLink from event WHERE imgcategory='1' and eventDate >= CURDATE();";
-    $result =mysqli_query($conn, $query)or die ("Error in query" . mysqli_error($conn));
-
-
+  $name=$POST['name'];
+$date =$_POST['date'];
+$adres =$_['adres'];
+$dur=$_POST['duration'];
+$type=$POST['tevent'];
+$ims=$_POST['imagesiz'];
+$conn = mysqli_connect('localhost', 'root', '', 'events') or die('Cannot connect to db');
+ $q='  INSERT INTO table_name (name,edate,)
+VALUES (value1, value2, value3, ...)';  
     
 ?>
 
@@ -24,53 +27,26 @@ error_reporting(0);
 </head>
 <body>
    <nav class="navbar navbar-expand-lg navbar-light bg-light  navbar navbar-dark bg-dark">
-  <a class="navbar-brand" style="color :#00FFFF;" href="http://localhost/fpage.php">Let's book!</a>
+   <a class="navbar-brand" style="color :#00FFFF;" href="http://localhost/workers.php">Let's book!</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-      
-      <li class="nav-item">
-        <a class="nav-link" href="new.php">News</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Contact Us</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">About</a>
-      </li>
-      <li>
-          <div class="dropdown">
-  <button class="btn btn-dark" style="background-color#424242 ;"
-     data-toggle="dropdown"  >
-    Event Type Serch
-  </button>
-  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-   <?php
-      $typeq="select DISTINCT typeName from eventtypes INNER JOIN EVENT ON event.type = eventtypes.typeId";
-       $typer =mysqli_query($conn, $typeq)or die ("Error in query" . mysqli_error($conn));
-      while($row = mysqli_fetch_assoc($typer)) {
-    echo'<a class="dropdown-item" href="typeserch.php?type='.$row[typeName].'">'.$row[typeName].'</a>';
-        } ?>
-  </div>
-</div>
-      </li>
+     
+  
       
       
       
       
          <?php
-            if (isset($_SESSION["login"]) ){
-                if( $_SESSION["user"] == 'worker'){header('Location:http://localhost/workers.php');}
+            if (isset($_SESSION["login"])){
                 $id=$_SESSION['login'];
                  $logquery = "select clientName from client WHERE clientId =$id ";
     $logresult =mysqli_query($conn, $logquery)or die ("Error in query" . mysqli_error($conn));
                 $logrow = mysqli_fetch_assoc($logresult);
-                echo' <li class="nav-item">';
-                echo'<a class="nav-link" href="ticketeventselecter.php">View Tickets</a>';
-              echo'</li>';
+                
                  echo'<li class="nav-item dropdown" style="float: right;">';
                 echo'<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">';
                 echo'hello '. $logrow[clientName];
@@ -132,63 +108,67 @@ echo"</div>";
         
     </ul>
     
-    <form class="form-inline my-2 my-lg-0" action="serch.php" method="post">
-      <input class="form-control mr-sm-2" type="search" name='serch'>
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
+    
   </div>
 </nav>
-<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-  <ol class="carousel-indicators">
-    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-  </ol>
-  <div class="carousel-inner">
-    <div class="carousel-item active">
-      <img class="d-block w-100 "  id="back"src="uploads/basic1.png" alt="First slide">
-    </div>
-    <div class="carousel-item">
-      <img class="d-block w-100" id="back"  src="uploads/basic2.jpg" alt="Second slide">
-    </div>
-    <div class="carousel-item">
-      <img class="d-block w-100" src="..." alt="Third slide">
-    </div>
-  </div>
-  <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="sr-only">Previous</span>
-  </a>
-  <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="sr-only">Next</span>
-  </a>
-</div>
-<body class="container-fluid">
+<div class='jumbotron' style='background-color:#808080; width:80%;    margin-left: 10%; margin-top: 2%;'>
+       <body class="container-fluid">
 
         <div class="row">
-         <?php
-               while($row = mysqli_fetch_assoc($result)) {
-                   
-                   
-                   
-                echo " <div id='ev' class='col-sm-12 col-md-4 col-lg-2'><a href='http://localhost/showpage.php?id=$row[eventId]&see=1' style:'text-decoration: none'>";
-             
-              echo "<img id='ime' src=$row[imagLink]>";
-              echo "<h4 >$row[name] </h4>";
-            echo"<p style = 'color: white;'>$row[eventDate]</p>";    
+        
+         
+         
+          <form  method='post' action='ticketsa.php' class='container-fluid'>
+                          <div class='row'>";
+                          <h5   class='col-sm-12 col-md-12 col-lg-12'>name of Event:</h5>
+                            <input type='text' name='name'  class='col-sm-12 col-md-12 col-lg-12'>
+       
+                            <h5   class='col-sm-12 col-md-12 col-lg-12'>Date witch it is held:</h5>
+                            <input type='date' name='date'  class='col-sm-12 col-md-12 col-lg-12'>
+      
+                            <h5   class='col-sm-12 col-md-12 col-lg-12'>Addres of event:</h5>
+                            <input type='text' name='adres'  class='col-sm-12 col-md-12 col-lg-12'>
+                            <h5   class='col-sm-12 col-md-12 col-lg-12'>Duration of event in dayes</h5>
+                            <input type='number' name='duration'  class='col-sm-12 col-md-12 col-lg-12'>
+                            
+                             
+                              <h5   class='col-sm-12 col-md-12 col-lg-12'>Type of event:</h5>
+                               <select name="tevent">
+                                <?php
+      $typeq="select DISTINCT typeName,typeId from eventtypes INNER JOIN EVENT ON event.type = eventtypes.typeId";
+       $typer =mysqli_query($conn, $typeq)or die ("Error in query" . mysqli_error($conn));
+      while($row = mysqli_fetch_assoc($typer)) {
+    echo' <option value="'.$row[typeId].'">'.$row[typeName].'</option> ';
+        } 
+                              echo'</select>';
+                               echo"<h5   class='col-sm-12 col-md-12 col-lg-12'>Type of imag size:</h5>";
+                              echo' <select name="imagesiz">';
+                            
+      $mypeq="select DISTINCT id,categoryname from imagcategory";
+       $myper =mysqli_query($conn, $mypeq)or die ("Error in query" . mysqli_error($conn));
+      while($mrow = mysqli_fetch_assoc($myper)) {
+    echo' <option value="'.$mrow[id].'">'.$mrow[categoryname].'</option> ';
+        } ?>
+                              </select>
+                              <h5   class='col-sm-12 col-md-12 col-lg-12'>number Of tickets:</h5>
+                            <input type='text' name='ticketn'  class='col-sm-12 col-md-12 col-lg-12'>
+                               
+            
+                                    
 
-           echo '</a></div>';
-               }              
-            ?>
-         
-         
-         
+                                     </div>
+                                 </form>
            
 
 
         </div>
     </body>
+          
+          <div class='container'>
+    </div>
+    </div>
+
+
  
 </body>
 </html>

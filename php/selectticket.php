@@ -6,9 +6,7 @@ session_start();
 if(!isset($id) ||!isset($date)|| $id == null || $date == null){header('Location:fpage.php');}
 
  $conn = mysqli_connect('localhost', 'root', '', 'events')  or die('Cannot 123 connect to db');
-    $cquery = "select DISTINCT class.className , class.classId ,ticket.price From ticket INNER JOIN class ON ticket.classType = class.classId where eventId = $id and edate= '$date' ";
-    $cresult =mysqli_query($conn, $cquery)
-                or die ("Error in query" . mysqli_error($conn));
+  
 
  $query = "select event.eventId,event.name,event.imagLink,event.addres,event.durationInDays,eventtypes.typeName
     from event 
@@ -18,7 +16,7 @@ if(!isset($id) ||!isset($date)|| $id == null || $date == null){header('Location:
                 or die ("Error in query" . mysqli_error($conn));
  $ron = mysqli_num_rows($result);
  if( $ron == '0' ){
-        header('Location:http://localhost/fpage.php'); echo "34";} 
+        header('Location:http://localhost/fpage.php');} 
 
 ?>
 
@@ -190,6 +188,14 @@ echo"</div>";
                   echo"<p>type:$row[typeName] </p><p>Addres: $row[addres]</p><p>Date:$date</p>";
                   
                        
+      $cquery = "select DISTINCT class.className , class.classId ,ticket.price From ticket INNER JOIN class ON ticket.classType = class.classId where eventId = $id and edate= '$date' ";
+    $cresult =mysqli_query($conn, $cquery)
+                or die ("Error in query" . mysqli_error($conn));
+                        if((mysqli_num_rows($cresult)==0 )){                              
+                            echo"<div class='container' style=' width: 100%; background-color: #A9A9A9;#A9A9A9' >";
+                            echo "<h3> sorry this Event is not bin inserted any tickets  ";
+                     
+                                  echo"</div>";}
  
                         while($crow = mysqli_fetch_assoc($cresult)){
                            $q=1;    
@@ -199,7 +205,7 @@ echo"</div>";
                             $nresult =mysqli_query($conn, $nquery) or die ("Error in query" . mysqli_error($conn));
                                     $rows = mysqli_num_rows($nresult);
                            
-                            if(mysqli_num_rows($nresult)>1){
+                            if((mysqli_num_rows($nresult))>0 ){
                             echo"<div class='container' style=' width: 100%; background-color: #A9A9A9;#A9A9A9' >";
                      echo"<form  method='post' action='buyform.php' class='container-fluid'>";
                             echo  "<input type='text' style='visibility: hidden' value='$date' name='date'>";
@@ -226,6 +232,7 @@ echo"</div>";
                                       }
 
                                                     echo"</select>";
+                               
 
                             
                             

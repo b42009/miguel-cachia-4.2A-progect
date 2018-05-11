@@ -94,6 +94,7 @@ $_SESSION["buywor"] = "You have to login to buy.";
            <?php
      
             if (isset($_SESSION["login"])){
+                 if( $_SESSION["user"] == 'worker'){header('Location:http://localhost/workers.php');}
                 $idu=$_SESSION['login'];
                  $logquery = "select clientName from client WHERE clientId =$idu ";
                 $logresult =mysqli_query($conn, $logquery)or die ("Error in query" . mysqli_error($conn));

@@ -66,6 +66,7 @@ error_reporting(0);
       
          <?php
             if (isset($_SESSION["login"])){
+                 if( $_SESSION["user"] == 'worker'){header('Location:http://localhost/workers.php');}
                 $id=$_SESSION['login'];
                  $logquery = "select clientName from client WHERE clientId =$id ";
     $logresult =mysqli_query($conn, $logquery)or die ("Error in query" . mysqli_error($conn));

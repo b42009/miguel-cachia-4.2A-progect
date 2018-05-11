@@ -1,26 +1,27 @@
 <?php
 error_reporting(0);
-session_start();
- $id= $_GET['id'];
-$see=$_GET['see'];
-if(!isset($id) || $id == null){header('Location:http://localhost/fpage.php');}
-else{
+    session_start();
+ $eid= $_GET['id'];
+echo $eid;
+   
 
 
  $conn = mysqli_connect('localhost', 'root', '', 'events')  or die('Cannot 123 connect to db');
     $query = "select event.eventId,event.name,event.eventDate,event.imagLink,event.addres,event.durationInDays,eventtypes.typeName
     from event 
     INNER JOIN eventtypes ON event.type = eventtypes.typeId
-    where event.eventId = '$id' ";
+    where event.eventId = '$eid' ";
     $result =mysqli_query($conn, $query)
                 or die ("Error in query" . mysqli_error($conn));
   
     
-    if(mysqli_num_rows($result)==0){header('Location:http://localhost/fpage.php');}
-    
+    if(mysqli_num_rows($result)==0){header('Location:http://localhost/workers.php');}
+  
     $row = mysqli_fetch_assoc($result);
 
+    
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -35,63 +36,37 @@ else{
 </head>
 <body>
    <nav class="navbar navbar-expand-lg navbar-light bg-light  navbar navbar-dark bg-dark">
-  <a class="navbar-brand" style="color :#00FFFF;" href="http://localhost/fpage.php">Let's book!</a>
+   <a class="navbar-brand" style="color :#00FFFF;" href="http://localhost/workers.php">Let's book!</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-      
-      <li class="nav-item">
-        <a class="nav-link" href="new.php">News</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Contact Us</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">About</a>
-      </li>
-       <li>
-          <div class="dropdown">
-  <button class="btn btn-dark" style="background-color#424242 ;"
-     data-toggle="dropdown"  >
-    Event Type Serch
-  </button>
-  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-   <?php
-      $typeq="select DISTINCT typeName from eventtypes INNER JOIN EVENT ON event.type = eventtypes.typeId";
-       $typer =mysqli_query($conn, $typeq)or die ("Error in query" . mysqli_error($conn));
-      while($rrow = mysqli_fetch_assoc($typer)) {
-    echo'<a class="dropdown-item" href="typeserch.php?type='.$rrow[typeName].'">'.$rrow[typeName].'</a>';
-        } ?>
-  </div>
-</div>
-      </li>
+     
+  
       
       
       
-       <?php
+      
+         <?php
             if (isset($_SESSION["login"])){
-                 if( $_SESSION["user"] == 'worker'){header('Location:http://localhost/workers.php');}
-                $idu=$_SESSION['login'];
-                 $logquery = "select clientName from client WHERE clientId =$idu ";
+                $id=$_SESSION['login'];
+                 $logquery = "select clientName from client WHERE clientId =$id ";
     $logresult =mysqli_query($conn, $logquery)or die ("Error in query" . mysqli_error($conn));
                 $logrow = mysqli_fetch_assoc($logresult);
-                 echo' <li class="nav-item">';
-                echo'<a class="nav-link" href="ticketeventselecter.php">View Tickets</a>';
-              echo'</li>';
+                
                  echo'<li class="nav-item dropdown" style="float: right;">';
                 echo'<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">';
                 echo'hello '. $logrow[clientName];
                 echo'</a>';
-           echo'<div id="drop" class="dropdown-menu" aria-labelledby="navbarDropdown">';
-               echo"<h4><a href='http://localhost/logout.php?page=logout.php?&id=$id&page=showpage.php&cata=2&see=1'>LogOut</a></h4>";
+            echo'<div id="drop" class="dropdown-menu" aria-labelledby="navbarDropdown">';
+              echo"<h4><a href='http://localhost/logout.php?page=logout.php?&page=fpage.php&cata=1'>LogOut</a></h4>";
                echo' </div>';
                 echo'</li>';
-               
             }
            else{ 
+              
                 echo'<button type="button" class="btn btn-dark" data-toggle="modal" data-target="#exampleModal" style="background-color#424242 ; ">';
                   echo'Login/Sghn up';
                 echo'</button>';
@@ -106,7 +81,7 @@ else{
        echo' </button>';
       echo'</div>';
       echo'<div class="modal-body">';
-        echo'<form  method="post" action="loginp.php">';
+        echo'<form class="form-inline" method="post" action="loginp.php">';
                     echo'<div class="form-group">';
                      echo'<label for="email">Username</label><br>';
                      echo' <input type="text" class="form-control" id="username" placeholder="Enter Usename" name="username">';
@@ -125,10 +100,9 @@ else{
                    echo' <a href="">Forgot password</a><p>';
                 echo'<a href="accauntform.php">Sing Up</a>';
                   echo  "<input type='text' style='visibility: hidden' value='$date' name='date'>";
-                echo  "<input type='text' style='visibility: hidden' value='showpage.php' name='page'>";
-                echo  "<input type='text' style='visibility: hidden' value='2' name='cata'>";
+                echo  "<input type='text' style='visibility: hidden' value='fpage.php' name='page'>";
+                echo  "<input type='text' style='visibility: hidden' value='1' name='cata'>";
                  echo  "<input type='text' style='visibility: hidden' value='$id' name='idi'>";
-              echo  "<input type='text' style='visibility: hidden' value='1' name=' see'>";
              echo'</form>';
       echo"</div>";
       
@@ -138,42 +112,19 @@ echo"</div>";
                
             }
             ?>
+   
+          
+        
     </ul>
     
-    <form class="form-inline my-2 my-lg-0" action="serch.php" method="post">
-      <input class="form-control mr-sm-2" type="search" name='serch'>
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
+    
   </div>
 </nav>
-<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-  <ol class="carousel-indicators">
-    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-  </ol>
-  <div class="carousel-inner">
-    <div class="carousel-item active">
-      <img class="d-block w-100 "  id="back"src="uploads/basic1.png" alt="First slide">
-    </div>
-    <div class="carousel-item">
-      <img class="d-block w-100" id="back"  src="uploads/basic2.jpg" alt="Second slide">
-    </div>
-    <div class="carousel-item">
-      <img class="d-block w-100" src="..." alt="Third slide">
-    </div>
-  </div>
-  <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="sr-only">Previous</span>
-  </a>
-  <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="sr-only">Next</span>
-  </a>
-</div>
-<body class="container-fluid">
-<?php
+<div class='jumbotron' style='background-color:#808080; width:80%;    margin-left: 10%; margin-top: 2%;'>
+       <body class="container-fluid">
+
+        <div class="row">
+         <?php
     
     
      
@@ -181,6 +132,7 @@ echo"</div>";
    
   
                 
+                 
  echo "<div class='jumbotron' style='background-color:#808080; width:80%;    margin-left: 10%; margin-top: 2%;'>";
           
           echo"<div class='container'>";
@@ -190,11 +142,11 @@ echo"</div>";
                   echo"<H2>$row[name] </H2><p></p>";
                   echo"<hr style='border-top: dotted 3px;' />";
                   echo"<p>type:$row[typeName] </p><p>Addres: $row[addres]</p>";
+            echo'Tickets taken';
                   
                         @$da = new DateTime($row[eventDate]);
                             $da->modify('-1 day');
-                        if($see == 1){
-                            
+                      
                         for($z = 1;$z<=$row[durationInDays];$z++){
                               $datrow = mysqli_fetch_assoc($datresult);
                             $da->modify('+1 day');
@@ -204,10 +156,29 @@ echo"</div>";
                             echo"<div class='container' style=' width: 100%; background-color: #A9A9A9;#A9A9A9' >";
                      echo"<form  method='post' action='' class='container-fluid'>";
                           echo"<div class='row'>";
-                          echo"<h5   class='col-sm-12 col-md-7 col-lg-7'>Date :$dai </h5>";
-
+                          echo"<h5   class='col-sm-12 col-md-12 col-lg-12'>Date :$dai </h5> <br />";
+                            
+                            $aquery = "select tiketId from ticket
+                            where eventId = $eid and edate = '$dai' ";
+                             $aresult =mysqli_query($conn, $aquery)or die ("Error in query" . mysqli_error($conn));
+                            $all =mysqli_num_rows($aresult);
+                            
+                            
+                            $tquery = "select tiketId from ticket
+                            where eventId = $eid and edate = '$dai'and cliantId IS NOT NULL ";
+                             $tresult =mysqli_query($conn,$tquery)or die ("Error in query2" . mysqli_error($conn));
+                            $taken =mysqli_num_rows($tresult);
+                            $per = (($taken/$all)*100);
+                            echo $taken.'/'.$all;
+                            
+echo'<div class="progress"style=" width: 100%;">';
+  echo'<div class="progress-bar" role="progressbar" aria-valuenow="100"';
+  echo'aria-valuemin="0" aria-valuemax="'.$all.'" style="width:'.$per.'%">';
+    echo''.$taken.'%';
+  echo'</div>';
+echo'</div>';
                         
-                                     echo"<button  class='col-sm-12 col-md-2 col-lg-2'><a href='http://localhost/selectticket.php?date=$dai&id=$id' style:'text-decoration: none'>select</a></button>";
+                                   
                                       
 
                                       echo"</div>";
@@ -217,46 +188,24 @@ echo"</div>";
                             
                             
                             
-                            }}
-     if($see == 2){
-                        for($z = 1;$z<=$row[durationInDays];$z++){
-                              $datrow = mysqli_fetch_assoc($datresult);
-                            $da->modify('+1 day');
-                               $dai =  date_format($da, 'Y-m-d');
-                           
-                           echo"<p>";
-                            echo"<div class='container' style=' width: 100%; background-color: #A9A9A9;#A9A9A9' >";
-                     echo"<form  method='post' action='' class='container-fluid'>";
-                          echo"<div class='row'>";
-                          echo"<h5   class='col-sm-12 col-md-7 col-lg-7'>Date :$dai </h5>";
-
-                        
-                                     echo"<button  class='col-sm-12 col-md-2 col-lg-2'><a href='http://localhost/ticketview.php?date=$dai&eventid=$id&see=1' style:'text-decoration: none'>select</a></button>";
-                                      
-
-                                      echo"</div>";
-                                  echo"</form>";
-                                  echo"</div>";  
-                            
-                            
-                            
-                            
-                            }}
-                        
-                              echo"</div>";
- 
-   
-   
-       echo"</div>";
-       echo"</div>";
-       echo"</div>";
+                            }
 
 
        ?>
+         
+         
+         
+           
+
+
+        </div>
     </body>
+          
+          <button><h1><a href="workers.php">Back</a></h1></button>
+    </div>
+
+
  
 </body>
 </html>
-<?php
-}
-?>
+<?php}}}?>

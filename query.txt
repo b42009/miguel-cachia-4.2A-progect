@@ -1,0 +1,3 @@
+select Column_name 
+from Information_schema.columns 
+where Table_name like 'employees'
