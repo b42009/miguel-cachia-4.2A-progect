@@ -18,11 +18,12 @@ namespace project
         {
             String username = user.Text;
             String password = pass.Text;
-            string connectionString = "datasource=127.0.0.1;port=3308;username=root;password=;database=events;";
-            string query = "SELECT * FROM events where userName ='" + username + "' and passWord = '" + password + "'";
+            string connectionString = "datasource=localhost;username=root;password=;database=events;";
+            string query = "SELECT * FROM workers where userName ='"+ username + "' and passWord = '" + password + "'";
             MySqlConnection databaseConnection = new MySqlConnection(connectionString);
             MySqlCommand commandDatabase = new MySqlCommand(query, databaseConnection);
-
+           
+            MessageBox.Show(query);
             MySqlDataReader reader;
             try
             {
@@ -49,6 +50,7 @@ namespace project
             }
             catch (Exception ex)
             {
+                MessageBox.Show(ex.ToString());
                 MessageBox.Show("Problem with Query");
             }
         }
@@ -83,7 +85,7 @@ namespace project
 
         private void button2_Click(object sender, EventArgs e)
         {
-
+            log();
         }
     }
 }

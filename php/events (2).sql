@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 04, 2018 at 09:08 AM
+-- Generation Time: May 11, 2018 at 10:08 AM
 -- Server version: 10.1.31-MariaDB
 -- PHP Version: 7.2.3
 
@@ -67,7 +67,9 @@ CREATE TABLE `client` (
 
 INSERT INTO `client` (`clientId`, `clientName`, `clientSurname`, `dateOfBirth`, `email`, `userName`, `passWord`, `bankId`) VALUES
 (1, 'miguel', 'cachia', '1999-12-27', 'cachiamiguel@gmail.com', 'mig', 'Qa.1999', NULL),
-(2, 'jhon', 'smith', '1996-04-04', 'jhonsmith@gmail.com', 'jhons', 'j.123', NULL);
+(2, 'jhon', 'smith', '1996-04-04', 'jhonsmith@gmail.com', 'jhons', 'j.123', NULL),
+(21, 'clayton', 'cachia', '1996-06-25', 'cachia@gmail.com', 'nuzzi', 'nuz123', NULL),
+(22, 'julia', 'musu', '2011-01-01', 'julia@gmail.com', 'julia11', 'ajj', NULL);
 
 -- --------------------------------------------------------
 
@@ -93,14 +95,15 @@ CREATE TABLE `event` (
 --
 
 INSERT INTO `event` (`eventId`, `name`, `edate`, `imagLink`, `eventDate`, `addres`, `Tikkitimag`, `type`, `imgcategory`, `durationInDays`) VALUES
-(9, 'Cafe Del Mar Party', '2018-04-25', 'uploads\\CDMposter.jpg', '2018-06-01', 'Cafe del mar Qawra', '', 1, 1, 1),
-(10, 'Summer Party', '2018-04-25', 'uploads\\p1.jpg', '2018-06-16', 'uno club', '', 1, 1, 1),
+(9, 'Cafe Del Mar Party', '2018-04-25', 'uploads\\CDMposter.jpg', '2018-08-04', 'Cafe del mar Qawra', '', 1, 1, 1),
+(10, 'Summer Party', '2018-04-25', 'uploads\\p1.jpg', '2018-06-07', 'tetingers', '', 1, 1, 1),
 (11, 'Entheos', '2018-04-25', 'uploads\\p2.jpg', '2018-06-02', 'velvid club', '', 1, 1, 1),
 (12, 'Glow Party', '2018-04-25', 'uploads\\p3.jpg', '2018-05-31', 'tetingers Club', '', 1, 1, 1),
 (13, 'Night Party', '2018-04-25', 'uploads\\p4.jpg', '2018-06-06', 'Havana club', '', 1, 1, 1),
 (14, 'The Rose Tatto', '2018-04-25', 'uploads\\pl1.jpg', '2018-06-02', 'Manuel Teather', '', 2, 1, 3),
 (15, 'CM vs MW Boxing', '2017-11-01', 'uploads\\sp2.jpg', '2018-01-28', 'wise guys gym', '', 3, 1, 1),
-(16, 'Summer carnival', '2018-04-25', 'uploads\\basic2.jpg', '2018-08-22', 'carnival summer party', '', 1, 2, 1);
+(16, 'Summer carnival', '2018-04-25', 'uploads\\basic2.jpg', '2018-08-15', 'carnival summer party', '', 1, 2, 1),
+(72, 'All Gigs Free', '2018-05-09', 'uploads/allgigsfree.jpg', '2018-07-18', ' part club burmarat', '', 1, 1, 2);
 
 -- --------------------------------------------------------
 
@@ -130,16 +133,36 @@ INSERT INTO `eventtypes` (`typeId`, `typeName`) VALUES
 
 CREATE TABLE `imagcategory` (
   `id` int(11) NOT NULL,
-  `category name` varchar(100) NOT NULL
+  `categoryname` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `imagcategory`
 --
 
-INSERT INTO `imagcategory` (`id`, `category name`) VALUES
+INSERT INTO `imagcategory` (`id`, `categoryname`) VALUES
 (1, 'normal'),
 (2, 'big');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `job`
+--
+
+CREATE TABLE `job` (
+  `jobId` int(11) NOT NULL,
+  `jobName` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `job`
+--
+
+INSERT INTO `job` (`jobId`, `jobName`) VALUES
+(1, 'Boss'),
+(2, 'Manager'),
+(3, 'Worker');
 
 -- --------------------------------------------------------
 
@@ -182,21 +205,53 @@ INSERT INTO `ticket` (`tiketId`, `tiketCode`, `price`, `classType`, `cliantId`, 
 (15, 'TRS208', 10, 4, NULL, 14, 0, '20:00:00', 120, '2018-06-04'),
 (16, 'TRS209', 10, 4, NULL, 14, 0, '20:00:00', 120, '2018-06-04'),
 (17, 'TRS210', 10, 4, NULL, 14, 0, '20:00:00', 120, '2018-06-04'),
-(18, 'TRS300', 5, 5, NULL, 14, 0, '20:00:00', 120, '2018-06-02'),
+(18, 'TRS300', 5, 5, 1, 14, 0, '20:00:00', 120, '2018-06-02'),
 (19, 'TRS301', 5, 5, NULL, 14, 0, '20:00:00', 120, '2018-06-02'),
 (20, 'TRS302', 5, 5, NULL, 14, 0, '20:00:00', 120, '2018-06-02'),
 (21, 'TRS303', 5, 5, NULL, 14, 0, '20:00:00', 120, '2018-06-02'),
 (22, 'TRS304', 5, 5, 1, 14, 0, '20:00:00', 120, '2018-06-03'),
 (23, 'TRS305', 5, 5, 1, 14, 0, '20:00:00', 120, '2018-06-03'),
 (24, 'TRS306', 5, 5, 1, 14, 0, '20:00:00', 120, '2018-06-03'),
-(25, 'np01', 5, 1, NULL, 13, 0, '08:00:00', NULL, '2018-06-06'),
-(26, 'np02', 5, 1, NULL, 13, 0, '08:00:00', 6, '2018-06-06'),
-(27, 'np03', 5, 1, NULL, 13, 0, '08:00:00', NULL, '2018-06-06'),
+(25, 'np01', 5, 1, 1, 13, 0, '08:00:00', NULL, '2018-06-06'),
+(26, 'np02', 5, 1, 1, 13, 0, '08:00:00', 6, '2018-06-06'),
+(27, 'np03', 5, 1, 1, 13, 0, '08:00:00', NULL, '2018-06-06'),
 (29, 'np11', 10, 2, NULL, 13, 0, '08:00:00', NULL, '2018-06-06'),
 (30, 'np12', 10, 2, NULL, 13, 0, '08:00:00', NULL, '2018-06-06'),
 (31, 'np13', 10, 2, NULL, 13, 0, '08:00:00', NULL, '2018-06-06'),
-(32, 'np04', 5, 1, NULL, 13, 0, '08:00:00', NULL, '2018-06-06'),
-(33, 'np04', 5, 1, NULL, 13, 0, '08:00:00', NULL, '2018-06-06');
+(32, 'np04', 5, 1, 1, 13, 0, '08:00:00', NULL, '2018-06-06'),
+(33, 'np04', 5, 1, NULL, 13, 0, '08:00:00', NULL, '2018-06-06'),
+(34, 'TRS309', 5, 5, NULL, 14, 0, '20:00:00', 120, '2018-06-04'),
+(35, 'TRS300', 5, 5, NULL, 14, 0, '20:00:00', 120, '2018-06-04'),
+(109, 'AGF001', 5, 1, NULL, 72, 0, '20:00:00', NULL, '2018-06-29'),
+(110, 'AGF002', 10, 2, NULL, 72, 0, '20:00:00', NULL, '2018-06-29'),
+(111, 'AGF003', 5, 1, NULL, 72, 0, '20:00:00', NULL, '2018-06-30'),
+(112, 'AGF004', 10, 2, NULL, 72, 0, '20:00:00', NULL, '2018-06-30');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `workers`
+--
+
+CREATE TABLE `workers` (
+  `workerId` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `surname` varchar(50) NOT NULL,
+  `dateOfBirth` date NOT NULL,
+  `email` varchar(200) NOT NULL,
+  `jobid` int(11) NOT NULL,
+  `username` varchar(50) NOT NULL,
+  `password` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `workers`
+--
+
+INSERT INTO `workers` (`workerId`, `name`, `surname`, `dateOfBirth`, `email`, `jobid`, `username`, `password`) VALUES
+(1, 'miguel', 'cachia', '1999-12-27', 'cachiamiguel@gmail.com', 1, 'tickB001', 'B.100'),
+(2, 'claud', 'bugeja', '2000-12-25', 'claud@gmail.com', 3, 'tickW001', 'W.100'),
+(3, 'clayton', 'borg', '1996-06-25', 'claytonborg@gmail.com', 2, 'tickM001', 'M.100');
 
 --
 -- Indexes for dumped tables
@@ -236,6 +291,12 @@ ALTER TABLE `imagcategory`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `job`
+--
+ALTER TABLE `job`
+  ADD PRIMARY KEY (`jobId`);
+
+--
 -- Indexes for table `ticket`
 --
 ALTER TABLE `ticket`
@@ -243,6 +304,13 @@ ALTER TABLE `ticket`
   ADD KEY `classType` (`classType`),
   ADD KEY `cliantId` (`cliantId`,`eventId`),
   ADD KEY `eventId` (`eventId`);
+
+--
+-- Indexes for table `workers`
+--
+ALTER TABLE `workers`
+  ADD PRIMARY KEY (`workerId`),
+  ADD KEY `jobid` (`jobid`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -258,13 +326,13 @@ ALTER TABLE `class`
 -- AUTO_INCREMENT for table `client`
 --
 ALTER TABLE `client`
-  MODIFY `clientId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `clientId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `event`
 --
 ALTER TABLE `event`
-  MODIFY `eventId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `eventId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
 
 --
 -- AUTO_INCREMENT for table `eventtypes`
@@ -279,10 +347,22 @@ ALTER TABLE `imagcategory`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
+-- AUTO_INCREMENT for table `job`
+--
+ALTER TABLE `job`
+  MODIFY `jobId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT for table `ticket`
 --
 ALTER TABLE `ticket`
-  MODIFY `tiketId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `tiketId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=113;
+
+--
+-- AUTO_INCREMENT for table `workers`
+--
+ALTER TABLE `workers`
+  MODIFY `workerId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Constraints for dumped tables
@@ -302,6 +382,12 @@ ALTER TABLE `ticket`
   ADD CONSTRAINT `ticket_ibfk_1` FOREIGN KEY (`eventId`) REFERENCES `event` (`eventId`) ON DELETE CASCADE,
   ADD CONSTRAINT `ticket_ibfk_2` FOREIGN KEY (`cliantId`) REFERENCES `client` (`clientId`) ON DELETE CASCADE,
   ADD CONSTRAINT `ticket_ibfk_3` FOREIGN KEY (`classType`) REFERENCES `class` (`classId`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `workers`
+--
+ALTER TABLE `workers`
+  ADD CONSTRAINT `workers_ibfk_1` FOREIGN KEY (`jobid`) REFERENCES `job` (`jobId`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

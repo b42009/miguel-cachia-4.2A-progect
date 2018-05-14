@@ -4,7 +4,7 @@ error_reporting(0);
 
     $conn = mysqli_connect('localhost', 'root', '', 'events') or die('Cannot connect to db');
 
-    $query = "select eventId,name, eventDate,imagLink from event WHERE imgcategory='1' and eventDate >= CURDATE();";
+    $query = "select eventId,name, eventDate,imagLink from event WHERE imgcategory='1' ";
     $result =mysqli_query($conn, $query)or die ("Error in query" . mysqli_error($conn));
 
     
@@ -38,15 +38,15 @@ error_reporting(0);
       
       
          <?php
-            if (isset($_SESSION["login"])){
+       if (isset($_SESSION["login"])){
                 $id=$_SESSION['login'];
-                 $logquery = "select clientName from client WHERE clientId =$id ";
+                 $logquery = "select Name from workers WHERE workerId =$id ";
     $logresult =mysqli_query($conn, $logquery)or die ("Error in query" . mysqli_error($conn));
                 $logrow = mysqli_fetch_assoc($logresult);
                 
                  echo'<li class="nav-item dropdown" style="float: right;">';
                 echo'<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">';
-                echo'hello '. $logrow[clientName];
+                echo'hello '. $logrow[Name];
                 echo'</a>';
             echo'<div id="drop" class="dropdown-menu" aria-labelledby="navbarDropdown">';
               echo"<h4><a href='http://localhost/logout.php?page=logout.php?&page=fpage.php&cata=1'>LogOut</a></h4>";
@@ -109,6 +109,8 @@ echo"</div>";
   </div>
 </nav>
 <div class='jumbotron' style='background-color:#808080; width:80%;    margin-left: 10%; margin-top: 2%;'>
+      <h1>Choos to Delet</h1>
+       <hr align="left"width="100%">
        <body class="container-fluid">
 
         <div class="row">
@@ -127,7 +129,7 @@ echo"</div>";
                }              
             ?>
          
-         
+         <br>
          <button><h1><a href="workers.php">Back</a></h1></button>
            
 

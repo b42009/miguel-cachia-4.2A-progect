@@ -1,25 +1,15 @@
 <?php
 error_reporting(0);
     session_start();
- $eid= $_GET['id'];
-echo $eid;
-   
+$ide=$_GET['id'];
 
 
- $conn = mysqli_connect('localhost', 'root', '', 'events')  or die('Cannot 123 connect to db');
-    $query = "select event.eventId,event.name,event.eventDate,event.imagLink,event.addres,event.durationInDays,eventtypes.typeName
-    from event 
-    INNER JOIN eventtypes ON event.type = eventtypes.typeId
-    where event.eventId = '$eid' ";
-    $result =mysqli_query($conn, $query)
-                or die ("Error in query" . mysqli_error($conn));
-  
-    
-    if(mysqli_num_rows($result)==0){header('Location:http://localhost/workers.php');}
-  
-    $row = mysqli_fetch_assoc($result);
+$conn = mysqli_connect('localhost', 'root', '', 'events') or die('Cannot connect to db');
+  $query = "select * from event WHERE imgcategory='1' and eventDate >= CURDATE() and eventId='$ide'";
+    $result =mysqli_query($conn, $query)or die ("Error in query" . mysqli_error($conn));
+$irow = mysqli_fetch_assoc($result);
 
-    
+
 ?>
 
 
@@ -50,7 +40,7 @@ echo $eid;
       
       
          <?php
-     if (isset($_SESSION["login"])){
+            if (isset($_SESSION["login"])){
                 $id=$_SESSION['login'];
                  $logquery = "select Name from workers WHERE workerId =$id ";
     $logresult =mysqli_query($conn, $logquery)or die ("Error in query" . mysqli_error($conn));
@@ -120,94 +110,50 @@ echo"</div>";
     
   </div>
 </nav>
-<div class='jumbotron' style='background-color:#808080; width:80%;    margin-left: 10%; margin-top: 2%;'>
-      <h1>View</h1>
-       <hr align="left"width="100%">
-       <body class="container-fluid">
-
-        <div class="row">
-         <?php
-    
-    
-     
-    
-   
-  
-                
-                 
- echo "<div class='jumbotron' style='background-color:#808080; width:80%;    margin-left: 10%; margin-top: 2%;'>";
-                
-          echo"<div class='container'>";
-              echo"<div class='row'>";
-              echo "<div class='col-sm-12 col-md-4 col-lg-4' ><img  class='img-thumbnail' style='width:25vh;'src='$row[imagLink]' alt='Event Poster'  ></div>";
-              echo "<div class='col-sm-12 col-md-8 col-lg-8'>";
-                  echo"<H2>$row[name] </H2><p></p>";
-                  echo"<hr style='border-top: dotted 3px;' />";
-                  echo"<p>type:$row[typeName] </p><p>Addres: $row[addres]</p>";
-            echo'Tickets taken';
-                  
-                        @$da = new DateTime($row[eventDate]);
-                            $da->modify('-1 day');
-                      
-                        for($z = 1;$z<=$row[durationInDays];$z++){
-                              $datrow = mysqli_fetch_assoc($datresult);
-                            $da->modify('+1 day');
-                               $dai =  date_format($da, 'Y-m-d');
-                           
-                           echo"<p>";
-                            echo"<div class='container' style=' width: 100%; background-color: #A9A9A9;#A9A9A9' >";
-                     echo"<form  method='post' action='' class='container-fluid'>";
-                          echo"<div class='row'>";
-                          echo"<h5   class='col-sm-12 col-md-12 col-lg-12'>Date :$dai </h5> <br />";
-                            
-                            $aquery = "select tiketId from ticket
-                            where eventId = $eid and edate = '$dai' ";
-                             $aresult =mysqli_query($conn, $aquery)or die ("Error in query" . mysqli_error($conn));
-                            $all =mysqli_num_rows($aresult);
-                            
-                            
-                            $tquery = "select tiketId from ticket
-                            where eventId = $eid and edate = '$dai'and cliantId IS NOT NULL ";
-                             $tresult =mysqli_query($conn,$tquery)or die ("Error in query2" . mysqli_error($conn));
-                            $taken =mysqli_num_rows($tresult);
-                            $per = (($taken/$all)*100);
-                            echo $taken.'/'.$all;
-                            
-echo'<div class="progress"style=" width: 100%;">';
-  echo'<div class="progress-bar" role="progressbar" aria-valuenow="100"';
-  echo'aria-valuemin="0" aria-valuemax="'.$all.'" style="width:'.$per.'%">';
-    echo''.$taken.'%';
-  echo'</div>';
-echo'</div>';
-                        
-                                   
-                                      
-
-                                      echo"</div>";
-                                  echo"</form>";
-                                  echo"</div>";  
-                            
-                            
-                            
-                            
-                            }
 
 
-       ?>
-         
-         
-         
-           
-
-
-        </div>
-    </body>
+<div class='jumbotron' style='background-color:#808080; width:90%;    margin-left: 5%; margin-top: 2%;'>
+        <h1>Update</h1>
+        <hr align="left"width="100%">
+        
+  <form  method='post' action='changeve.php' class='container-fluid'enctype='multipart/form-data'>
+                          <div class='row'>
+                          <h5   class='col-sm-12 col-md-12 col-lg-12'>name of Event:</h5>
+                            <input type='text' name='name'  class='col-sm-12 col-md-12 col-lg-12'value="<?php  echo ($irow[name]);?>"required>
+       
+                            <h5   class='col-sm-12 col-md-12 col-lg-12'>Date witch it is held:</h5>
+                            <input type='date' name='date'  class='col-sm-12 col-md-12 col-lg-12'value="<?php  echo $irow[edate];?>"required>
+      
+                            <h5   class='col-sm-12 col-md-12 col-lg-12'>Addres of event:</h5>
+                            <input type='text' name='adres'  class='col-sm-12 col-md-12 col-lg-12'value="<?php  echo $irow[addres];?>"required>
+                            <h5   class='col-sm-12 col-md-12 col-lg-12'>Duration of event in dayes</h5>
+                            <input type='number' name='duration'  class='col-sm-12 col-md-12 col-lg-12'value="<?php  echo ($irow[durationInDays]);?>"required>
+                            
+                             <input type="text" hidden name="idd" value="<?php echo $ide; ?>">
+                              <h5   class='col-sm-12 col-md-12 col-lg-12'>Type of event:</h5>
+                               <select name="tevent"value="<?php echo $irow['typeName']; ?>">
+                                <?php
+      $typeq="select DISTINCT typeName,typeId from eventtypes INNER JOIN EVENT ON event.type = eventtypes.typeId";
+       $typer =mysqli_query($conn, $typeq)or die ("Error in query" . mysqli_error($conn));
+      while($row = mysqli_fetch_assoc($typer)) {
+          if($irow[type]==$row[typeId]){echo' <option selected value="'.$row[typeId].'">'.$row[typeName].'</option> ';}
+    else {echo' <option value="'.$row[typeId].'">'.$row[typeName].'</option> ';}
+        } 
+                             
+                              
+                              
+                              ?>
+                           </select><br>
+                            
+             <input type="submit" name="submit">
           
-          <button><h1><a href="workers.php">Back</a></h1></button>
+          <div class='container'>
     </div>
+                              
+    </div>
+    </form></div>
 
 
  
 </body>
 </html>
-<?php}}}?>

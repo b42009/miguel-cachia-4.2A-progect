@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 04, 2018 at 09:08 AM
+-- Generation Time: May 11, 2018 at 10:08 AM
 -- Server version: 10.1.31-MariaDB
 -- PHP Version: 7.2.3
 
@@ -45,8 +45,8 @@ CREATE TABLE `bank` (
 --
 
 INSERT INTO `bank` (`accauntId`, `name`, `surname`, `cod`, `password`, `email`, `value`, `month`, `year`) VALUES
-(1, 'miguel', 'cachia', 1, 1234, 'cachiamiguel@gmail.com', 4425, 6, 2022),
-(2, 'company', 'company', 0, 0, 'company@gmail.com', 745, 12, 2028);
+(1, 'miguel', 'cachia', 1, 1234, 'cachiamiguel@gmail.com', 4260, 6, 2022),
+(2, 'company', 'company', 0, 0, 'company@gmail.com', 910, 12, 2028);
 
 --
 -- Indexes for dumped tables

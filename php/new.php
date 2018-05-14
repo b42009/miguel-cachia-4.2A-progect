@@ -41,6 +41,22 @@ error_reporting(0);
       <li class="nav-item">
         <a class="nav-link" href="#">About</a>
       </li>
+       <li>
+          <div class="dropdown">
+  <button class="btn btn-dark" style="background-color#424242 ;"
+     data-toggle="dropdown"  >
+    Event Type Serch
+  </button>
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+   <?php
+      $typeq="select DISTINCT typeName from eventtypes INNER JOIN EVENT ON event.type = eventtypes.typeId";
+       $typer =mysqli_query($conn, $typeq)or die ("Error in query" . mysqli_error($conn));
+      while($row = mysqli_fetch_assoc($typer)) {
+    echo'<a class="dropdown-item" href="typeserch.php?type='.$row[typeName].'">'.$row[typeName].'</a>';
+        } ?>
+  </div>
+</div>
+      </li>
       
       
       
@@ -135,7 +151,7 @@ echo"</div>";
       <img class="d-block w-100" id="back"  src="uploads/basic2.jpg" alt="Second slide">
     </div>
     <div class="carousel-item">
-      <img class="d-block w-100" src="..." alt="Third slide">
+      <img class="d-block w-100" src="uploads/chinisparty.jpg" alt="Third slide">
     </div>
   </div>
   <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">

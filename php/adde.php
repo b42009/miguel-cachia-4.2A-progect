@@ -34,15 +34,15 @@ $conn = mysqli_connect('localhost', 'root', '', 'events') or die('Cannot connect
       
       
          <?php
-            if (isset($_SESSION["login"])){
+           if (isset($_SESSION["login"])){
                 $id=$_SESSION['login'];
-                 $logquery = "select clientName from client WHERE clientId =$id ";
+                 $logquery = "select Name from workers WHERE workerId =$id ";
     $logresult =mysqli_query($conn, $logquery)or die ("Error in query" . mysqli_error($conn));
                 $logrow = mysqli_fetch_assoc($logresult);
                 
                  echo'<li class="nav-item dropdown" style="float: right;">';
                 echo'<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">';
-                echo'hello '. $logrow[clientName];
+                echo'hello '. $logrow[Name];
                 echo'</a>';
             echo'<div id="drop" class="dropdown-menu" aria-labelledby="navbarDropdown">';
               echo"<h4><a href='http://localhost/logout.php?page=logout.php?&page=fpage.php&cata=1'>LogOut</a></h4>";
@@ -105,6 +105,8 @@ echo"</div>";
   </div>
 </nav>
 <div class='jumbotron' style='background-color:#808080; width:80%;    margin-left: 10%; margin-top: 2%;'>
+      <h1>Add Event</h1>
+       <hr align="left"width="100%">
        <body class="container-fluid">
 
         <div class="row">
@@ -112,17 +114,17 @@ echo"</div>";
          
          
           <form  method='post' action='uplodevent.php' class='container-fluid'enctype='multipart/form-data'>
-                          <div class='row'>";
+                          <div class='row'>
                           <h5   class='col-sm-12 col-md-12 col-lg-12'>name of Event:</h5>
-                            <input type='text' name='name'  class='col-sm-12 col-md-12 col-lg-12'>
+                            <input type='text' name='name'  class='col-sm-12 col-md-12 col-lg-12'required>
        
                             <h5   class='col-sm-12 col-md-12 col-lg-12'>Date witch it is held:</h5>
-                            <input type='date' name='date'  class='col-sm-12 col-md-12 col-lg-12'>
+                            <input type='date' name='date'  class='col-sm-12 col-md-12 col-lg-12'required>
       
                             <h5   class='col-sm-12 col-md-12 col-lg-12'>Addres of event:</h5>
-                            <input type='text' name='adres'  class='col-sm-12 col-md-12 col-lg-12'>
+                            <input type='text' name='adres'  class='col-sm-12 col-md-12 col-lg-12'required>
                             <h5   class='col-sm-12 col-md-12 col-lg-12'>Duration of event in dayes</h5>
-                            <input type='number' name='duration'  class='col-sm-12 col-md-12 col-lg-12'>
+                            <input type='number' name='duration'  class='col-sm-12 col-md-12 col-lg-12'required>
                             
                              
                               <h5   class='col-sm-12 col-md-12 col-lg-12'>Type of event:</h5>

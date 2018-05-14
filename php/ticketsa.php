@@ -41,15 +41,15 @@ VALUES (value1, value2, value3, ...)';
       
       
          <?php
-            if (isset($_SESSION["login"])){
+    if (isset($_SESSION["login"])){
                 $id=$_SESSION['login'];
-                 $logquery = "select clientName from client WHERE clientId =$id ";
+                 $logquery = "select Name from workers WHERE workerId =$id ";
     $logresult =mysqli_query($conn, $logquery)or die ("Error in query" . mysqli_error($conn));
                 $logrow = mysqli_fetch_assoc($logresult);
                 
                  echo'<li class="nav-item dropdown" style="float: right;">';
                 echo'<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">';
-                echo'hello '. $logrow[clientName];
+                echo'hello '. $logrow[Name];
                 echo'</a>';
             echo'<div id="drop" class="dropdown-menu" aria-labelledby="navbarDropdown">';
               echo"<h4><a href='http://localhost/logout.php?page=logout.php?&page=fpage.php&cata=1'>LogOut</a></h4>";

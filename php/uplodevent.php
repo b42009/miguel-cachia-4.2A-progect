@@ -149,6 +149,8 @@ echo"</div>";
   </div>
 </nav>
 <div class='jumbotron' style='background-color:#808080; width:80%;    margin-left: 10%; margin-top: 2%;'>
+      <h1>Add Ticket</h1>
+       <hr align="left"width="100%">
        <body class="container-fluid">
 
         <div class="row">
@@ -157,15 +159,15 @@ echo"</div>";
           <form  method='post' action='ticketadd.php' class='container-fluid'>
                           <div class='row'>
                           <h5   class='col-sm-12 col-md-12 col-lg-12'>Ticked Code</h5>
-                            <input type='text' name='Cod'  class='col-sm-12 col-md-12 col-lg-12'>
+                            <input type='text' name='Cod'  class='col-sm-12 col-md-12 col-lg-12'required>
        
                             <h5   class='col-sm-12 col-md-12 col-lg-12'>Price</h5>
-                            <input type='number' name='Price'  class='col-sm-12 col-md-12 col-lg-12'>
+                            <input type='number' name='Price'  class='col-sm-12 col-md-12 col-lg-12'required>
       
                             <h5   class='col-sm-12 col-md-12 col-lg-12'>Time start</h5>
-                            <input type='time' name='time'  class='col-sm-12 col-md-12 col-lg-12'>
+                            <input type='time' name='time'  class='col-sm-12 col-md-12 col-lg-12'required>
                            
-                             <h5   class='col-sm-12 col-md-12 col-lg-12'>Date</h5>
+                             <h5   class='col-sm-12 col-md-12 col-lg-12'>Date</h5required>
                              <select name="date">
             <?php  $q="select * from event where name = '$name' and eventDate ='$date'" ;
             $qur =mysqli_query($conn, $q)or die ("Error in23 query" . mysqli_error($conn));

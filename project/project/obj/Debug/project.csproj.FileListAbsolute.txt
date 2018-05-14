@@ -31,3 +31,17 @@ I:\proget\project\project\bin\Debug\project.pdb
 I:\proget\project\project\bin\Debug\MySql.Data.dll
 I:\proget\project\project\bin\Debug\MySql.Data.xml
 I:\proget\project\project\obj\Debug\project.csprojResolveAssemblyReference.cache
+E:\proget\project\project\bin\Debug\project.exe.config
+E:\proget\project\project\obj\Debug\project.exe
+E:\proget\project\project\obj\Debug\project.pdb
+E:\proget\project\project\bin\Debug\project.exe
+E:\proget\project\project\bin\Debug\project.pdb
+E:\proget\project\project\bin\Debug\MySql.Data.xml
+E:\proget\project\project\obj\Debug\project.csprojResolveAssemblyReference.cache
+E:\proget\project\project\obj\Debug\project.home.resources
+E:\proget\project\project\obj\Debug\project.login.resources
+E:\proget\project\project\obj\Debug\project.Properties.Resources.resources
+E:\proget\project\project\obj\Debug\project.csproj.GenerateResource.Cache
+E:\proget\project\project\bin\Debug\Google.Protobuf.dll
+E:\proget\project\project\bin\Debug\MySql.Data.dll
+E:\proget\project\project\bin\Debug\System.Data.dll

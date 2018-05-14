@@ -2,7 +2,9 @@
 error_reporting(0);
     session_start();
 
-    $conn = mysqli_connect('localhost', 'root', '', 'events') or die('Cannot connect to db');
+  $conn = mysqli_connect('localhost', 'root', '', 'events') or die('Cannot connect to db');
+    $query = "select * from event WHERE imgcategory='1' ";
+    $result =mysqli_query($conn, $query)or die ("Error in query" . mysqli_error($conn));
 
 
 
@@ -23,7 +25,7 @@ error_reporting(0);
 </head>
 <body>
    <nav class="navbar navbar-expand-lg navbar-light bg-light  navbar navbar-dark bg-dark">
-   <a class="navbar-brand" style="color :#00FFFF;" href="http://localhostworkers.php">Let's book!</a>
+   <a class="navbar-brand" style="color :#00FFFF;" href="http://localhost/workers.php">Let's book!</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -37,15 +39,15 @@ error_reporting(0);
       
       
          <?php
-            if (isset($_SESSION["login"])){
+          if (isset($_SESSION["login"])){
                 $id=$_SESSION['login'];
-                 $logquery = "select clientName from client WHERE clientId =$id ";
+                 $logquery = "select Name from workers WHERE workerId =$id ";
     $logresult =mysqli_query($conn, $logquery)or die ("Error in query" . mysqli_error($conn));
                 $logrow = mysqli_fetch_assoc($logresult);
                 
                  echo'<li class="nav-item dropdown" style="float: right;">';
                 echo'<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">';
-                echo'hello '. $logrow[clientName];
+                echo'hello '. $logrow[Name];
                 echo'</a>';
             echo'<div id="drop" class="dropdown-menu" aria-labelledby="navbarDropdown">';
               echo"<h4><a href='http://localhost/logout.php?page=logout.php?&page=fpage.php&cata=1'>LogOut</a></h4>";
@@ -107,39 +109,49 @@ echo"</div>";
     
   </div>
 </nav>
-<div class='jumbotron' style='background-color:#808080; width:80%;    margin-left: 10%; margin-top: 2%;'>
+<div class='jumbotron' style='background-color:#808080; width:90%;    margin-left: 5%; margin-top: 2%;'>
         
-        
-         <table class="table table-dark">
+              <h1>Choos a colom to chang</h1>
+        <hr align="left"width="100%">
+         <table class="table table-dark" style="width:90%">
 <thead>
-    <tr><?php echo('<a  href="fpage.php"></a>');?>
-      <th>  <a href="" data-toggle="modal" data-target="#modalRegister">
-  Launch demo modal
-row</a></th>
-      <th scope="col">First</th>
-      <th scope="col">Last</th>
-      <th scope="col">Handle</th>
-      </tr>
+    <tr>
+     
+ 
+        <th scope="col">eventId</th>
+        <th scope="col">name</th>
+<th scope="col">edate</th>
+<th scope="col">imagLink</th>
+<th scope="col">eventDate</th>
+<th scope="col">addres</th>
+<th scope="col">Tikkitimag</th>
+<th scope="col">type</th>
+<th scope="col">imgcategory</th>
+<th scope="col">durationInDays</th>
+  
   </thead>
   <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td>Larry</td>
-      <td>the Bird</td>
-      <td>@twitter</td>
-    </tr>
+   <?php
+               while($row = mysqli_fetch_assoc($result)) {
+  $typeq="select DISTINCT typeName from eventtypes where typeId=$row[type]";
+       $typer =mysqli_query($conn, $typeq)or die ("Error in query" . mysqli_error($conn));
+    $trow = mysqli_fetch_assoc($typer);
+    echo'<tr>';
+      echo' <th scope="col"><a  href="updatevent.php?id='.$row[eventId].'">'.$row[eventId].'</a></th>';
+       echo'<th scope="col">'.$row[name].'</th>';
+       echo'<th scope="col">'.$row[edate].'</th>';
+       echo'<th scope="col">'.$row[imagLink].'</th>';
+       echo'<th scope="col">'.$row[eventDate].'</th>';
+       echo'<th scope="col">'.$row[addres].'</th>';
+       echo'<th scope="col">'.$row[ticktimag].'</th>';
+       echo'<th scope="col">'.$trow[typeName].'</th>';
+       echo'<th scope="col">'.$row[imagecategory].'</th>';
+       echo'<th scope="col">'.$row[durationInDays].'</th>';
+     
+    echo'</tr>';
+      }              
+            ?>
+   
   </tbody>
 </table>
           
