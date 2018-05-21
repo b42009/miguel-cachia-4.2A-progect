@@ -1,3 +1,0 @@
-﻿1>------ Build started: Project: WindowsFormsApp2, Configuration: Debug Any CPU ------
-1>  WindowsFormsApp2 -> \\main\stud_redir\b42009\mydocs\visual studio 2017\Projects\WindowsFormsApp2\WindowsFormsApp2\bin\Debug\WindowsFormsApp2.exe
-========== Build: 1 succeeded, 0 failed, 0 up-to-date, 0 skipped ==========

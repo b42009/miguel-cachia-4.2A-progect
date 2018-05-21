@@ -48,6 +48,30 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="addEvent.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="addEvent.Designer.cs">
+      <DependentUpon>addEvent.cs</DependentUpon>
+    </Compile>
+    <Compile Include="addworker.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="addworker.Designer.cs">
+      <DependentUpon>addworker.cs</DependentUpon>
+    </Compile>
+    <Compile Include="checkinchecker.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="checkinchecker.Designer.cs">
+      <DependentUpon>checkinchecker.cs</DependentUpon>
+    </Compile>
+    <Compile Include="checkinevent.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="checkinevent.Designer.cs">
+      <DependentUpon>checkinevent.cs</DependentUpon>
+    </Compile>
     <Compile Include="home.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -62,6 +86,42 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="showevent.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="showevent.Designer.cs">
+      <DependentUpon>showevent.cs</DependentUpon>
+    </Compile>
+    <Compile Include="showworkers.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="showworkers.Designer.cs">
+      <DependentUpon>showworkers.cs</DependentUpon>
+    </Compile>
+    <Compile Include="updateDelev.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="updateDelev.Designer.cs">
+      <DependentUpon>updateDelev.cs</DependentUpon>
+    </Compile>
+    <Compile Include="updatedelitwork.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="updatedelitwork.Designer.cs">
+      <DependentUpon>updatedelitwork.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="addEvent.resx">
+      <DependentUpon>addEvent.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="addworker.resx">
+      <DependentUpon>addworker.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="checkinchecker.resx">
+      <DependentUpon>checkinchecker.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="checkinevent.resx">
+      <DependentUpon>checkinevent.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="home.resx">
       <DependentUpon>home.cs</DependentUpon>
     </EmbeddedResource>
@@ -78,6 +138,18 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="showevent.resx">
+      <DependentUpon>showevent.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="showworkers.resx">
+      <DependentUpon>showworkers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="updateDelev.resx">
+      <DependentUpon>updateDelev.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="updatedelitwork.resx">
+      <DependentUpon>updatedelitwork.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

@@ -18,12 +18,12 @@ namespace project
         {
             String username = user.Text;
             String password = pass.Text;
-            string connectionString = "datasource=localhost;username=root;password=;database=events;";
-            string query = "SELECT * FROM workers where userName ='"+ username + "' and passWord = '" + password + "'";
+            string connectionString = "datasource=localhost;port=3306;username=root;password=;database=events;sslMode=none";
+            string query = "SELECT * FROM workers where userName ='"+ username + "' and passWord =  '" + password +"'" ;
             MySqlConnection databaseConnection = new MySqlConnection(connectionString);
             MySqlCommand commandDatabase = new MySqlCommand(query, databaseConnection);
            
-            MessageBox.Show(query);
+            
             MySqlDataReader reader;
             try
             {
@@ -36,8 +36,10 @@ namespace project
                     while (reader.Read())
                     {
                         string id = reader.GetInt32(0).ToString();
-                        MessageBox.Show(id);
+                       
                         home f1 = new home(id);
+                        f1.Show();
+                        this.Hide();
                     }
                 }
                 else

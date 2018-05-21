@@ -45,3 +45,11 @@ E:\proget\project\project\obj\Debug\project.csproj.GenerateResource.Cache
 E:\proget\project\project\bin\Debug\Google.Protobuf.dll
 E:\proget\project\project\bin\Debug\MySql.Data.dll
 E:\proget\project\project\bin\Debug\System.Data.dll
+E:\proget\project\project\obj\Debug\project.addEvent.resources
+E:\proget\project\project\obj\Debug\project.showevent.resources
+E:\proget\project\project\obj\Debug\project.updateDelev.resources
+E:\proget\project\project\obj\Debug\project.addworker.resources
+E:\proget\project\project\obj\Debug\project.showworkers.resources
+E:\proget\project\project\obj\Debug\project.updatedelitwork.resources
+E:\proget\project\project\obj\Debug\project.checkinevent.resources
+E:\proget\project\project\obj\Debug\project.checkinchecker.resources

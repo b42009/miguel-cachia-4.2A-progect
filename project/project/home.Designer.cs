@@ -29,61 +29,56 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(home));
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
+            this.addevent = new System.Windows.Forms.Button();
+            this.showevent = new System.Windows.Forms.Button();
+            this.showworkers = new System.Windows.Forms.Button();
+            this.eventhadiler = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.addworkers = new System.Windows.Forms.Button();
+            this.logout = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
-            // button1
+            // addevent
             // 
-            this.button1.Location = new System.Drawing.Point(252, 242);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(409, 41);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "Add Event";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.addevent.Location = new System.Drawing.Point(252, 244);
+            this.addevent.Name = "addevent";
+            this.addevent.Size = new System.Drawing.Size(409, 41);
+            this.addevent.TabIndex = 0;
+            this.addevent.Text = "Add Event";
+            this.addevent.UseVisualStyleBackColor = true;
+            this.addevent.Click += new System.EventHandler(this.button1_Click);
             // 
-            // button2
+            // showevent
             // 
-            this.button2.Location = new System.Drawing.Point(252, 308);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(409, 41);
-            this.button2.TabIndex = 1;
-            this.button2.Text = "Show Event\r\n";
-            this.button2.UseVisualStyleBackColor = true;
+            this.showevent.Location = new System.Drawing.Point(252, 301);
+            this.showevent.Name = "showevent";
+            this.showevent.Size = new System.Drawing.Size(409, 41);
+            this.showevent.TabIndex = 1;
+            this.showevent.Text = "Show Event\r\n";
+            this.showevent.UseVisualStyleBackColor = true;
+            this.showevent.Click += new System.EventHandler(this.button2_Click);
             // 
-            // button3
+            // showworkers
             // 
-            this.button3.Location = new System.Drawing.Point(252, 366);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(409, 41);
-            this.button3.TabIndex = 2;
-            this.button3.Text = "Add Employee";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.showworkers.Location = new System.Drawing.Point(252, 430);
+            this.showworkers.Name = "showworkers";
+            this.showworkers.Size = new System.Drawing.Size(409, 41);
+            this.showworkers.TabIndex = 2;
+            this.showworkers.Text = "Show Employee";
+            this.showworkers.UseVisualStyleBackColor = true;
+            this.showworkers.Click += new System.EventHandler(this.button3_Click);
             // 
-            // button4
+            // eventhadiler
             // 
-            this.button4.Location = new System.Drawing.Point(252, 423);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(409, 41);
-            this.button4.TabIndex = 3;
-            this.button4.Text = "Event Hadiler";
-            this.button4.UseVisualStyleBackColor = true;
-            // 
-            // button5
-            // 
-            this.button5.Location = new System.Drawing.Point(252, 481);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(409, 41);
-            this.button5.TabIndex = 4;
-            this.button5.Text = "button5";
-            this.button5.UseVisualStyleBackColor = true;
+            this.eventhadiler.Location = new System.Drawing.Point(252, 197);
+            this.eventhadiler.Name = "eventhadiler";
+            this.eventhadiler.Size = new System.Drawing.Size(409, 41);
+            this.eventhadiler.TabIndex = 3;
+            this.eventhadiler.Text = "Event Hadiler";
+            this.eventhadiler.UseVisualStyleBackColor = true;
+            this.eventhadiler.Click += new System.EventHandler(this.eventhadiler_Click);
             // 
             // pictureBox1
             // 
@@ -95,17 +90,50 @@
             this.pictureBox1.TabIndex = 5;
             this.pictureBox1.TabStop = false;
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(61, 44);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(81, 31);
+            this.label1.TabIndex = 6;
+            this.label1.Text = "Hello";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
+            // 
+            // addworkers
+            // 
+            this.addworkers.Location = new System.Drawing.Point(252, 368);
+            this.addworkers.Name = "addworkers";
+            this.addworkers.Size = new System.Drawing.Size(409, 41);
+            this.addworkers.TabIndex = 7;
+            this.addworkers.Text = "Add Worker ";
+            this.addworkers.UseVisualStyleBackColor = true;
+            this.addworkers.Click += new System.EventHandler(this.button6_Click);
+            // 
+            // logout
+            // 
+            this.logout.Location = new System.Drawing.Point(252, 494);
+            this.logout.Name = "logout";
+            this.logout.Size = new System.Drawing.Size(409, 41);
+            this.logout.TabIndex = 8;
+            this.logout.Text = "Log Out";
+            this.logout.UseVisualStyleBackColor = true;
+            this.logout.Click += new System.EventHandler(this.button1_Click_1);
+            // 
             // home
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.DodgerBlue;
             this.ClientSize = new System.Drawing.Size(931, 574);
-            this.Controls.Add(this.button5);
-            this.Controls.Add(this.button4);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.logout);
+            this.Controls.Add(this.addworkers);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.eventhadiler);
+            this.Controls.Add(this.showworkers);
+            this.Controls.Add(this.showevent);
+            this.Controls.Add(this.addevent);
             this.Controls.Add(this.pictureBox1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "home";
@@ -114,16 +142,19 @@
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.home_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button addevent;
+        private System.Windows.Forms.Button showevent;
+        private System.Windows.Forms.Button showworkers;
+        private System.Windows.Forms.Button eventhadiler;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button addworkers;
+        private System.Windows.Forms.Button logout;
     }
 }
