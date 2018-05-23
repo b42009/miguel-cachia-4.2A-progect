@@ -121,7 +121,10 @@ echo"</div>";
                    
                 echo " <div id='ev' class='col-sm-12 col-md-4 col-lg-2'><a href='http://localhost/show2.php?id=$row[eventId]' style:'text-decoration: none'>";
              
-              echo "<img id='ime' src=$row[imagLink]>";
+              if($row[imagLink] == null){
+               
+                     echo "<img id='ime' src='uploads/noimage.jpg'>";}
+                   else{ echo "<img id='ime' src=$row[imagLink]>";}
               echo "<h4 >$row[name] </h4>";
             echo"<p style = 'color: white;'>$row[eventDate]</p>";    
 

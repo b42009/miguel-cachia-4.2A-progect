@@ -59,5 +59,7 @@ else{
     }
 
 }
+    else{ $_SESSION["buywor"] = "not enaf money.";
+ header('Location:buyform.php?id='.$id.'&date='.$date.'&class='.$class.'&not='.$num);}
 }
 ?>

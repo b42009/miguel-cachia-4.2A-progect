@@ -162,7 +162,7 @@ echo"</div>";
     <span class="sr-only">Next</span>
   </a>
 </div>
-<body class="container-fluid">
+<body class="container-fluid" >
 
         <div class="row">
          <?php
@@ -171,8 +171,12 @@ echo"</div>";
                    
                    
                 echo " <div id='ev' class='col-sm-12 col-md-4 col-lg-2'><a href='http://localhost/showpage.php?id=$row[eventId]&see=1' style:'text-decoration: none'>";
+                  
+             if($row[imagLink] == null){
+               
+                     echo "<img id='ime' src='uploads/noimage.jpg'>";}
+                   else{ echo "<img id='ime' src=$row[imagLink]>";}
              
-              echo "<img id='ime' src=$row[imagLink]>";
               echo "<h4 >$row[name] </h4>";
             echo"<p style = 'color: white;'>$row[eventDate]</p>";    
 

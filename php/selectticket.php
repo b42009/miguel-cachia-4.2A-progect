@@ -174,7 +174,11 @@ echo"</div>";
           
           echo"<div class='container'>";
               echo"<div class='row'>";
-              echo "<div class='col-sm-12 col-md-4 col-lg-4' ><img  class='img-thumbnail' style='width:25vh;'src='$row[imagLink]' alt='Event Poster'  ></div>";
+      if($row[imagLink] == null){
+               
+                     echo "<div class='col-sm-12 col-md-4 col-lg-4' ><img  class='img-thumbnail' style='width:25vh;'src='uploads/noimage.jpg' alt='Event Poster'  ></div>";}
+                   else{  echo "<div class='col-sm-12 col-md-4 col-lg-4' ><img  class='img-thumbnail' style='width:25vh;'src='$row[imagLink]' alt='Event Poster'  ></div>";}
+              
               echo "<div class='col-sm-12 col-md-8 col-lg-8'>";
                    
                  if (isset($_SESSION["buywor"])){

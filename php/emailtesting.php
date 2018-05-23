@@ -8,21 +8,28 @@
        $maila="letsbook27@gmail.com";
 $mes='xbajt';
        $mail = new PHPMailer();
+$mail->mail->SMTPOptions = array(
+            'tls' => array(
+                'verify_peer' => false,
+                'verify_peer_name' => false,
+                'allow_self_signed' => true
+            )
+        );
         $mail->isSMTP();
         $mail->isHtml(true);
         $mail->Debugoutput = 'html';
-        $mail->Host = gethostbyname("smtp.office365.com");
+        $mail->Host = gethostbyname("smtp.Gmail.com");
         $mail->SMTPDebug = 2; #include client and server messages
         $mail->Port = 587;
         #$mail->Port = 587; #change to ssl SMTPSecure
         $mail->SMTPSecure = 'tls';
         $mail->SMTPAuth = true;
-        $mail->Username = "miguel.cachia.b42009@mcast.edu.mt";
-        $mail->Password = "mcast4800";
+        $mail->Username = "letsbook27@gmail.com";
+        $mail->Password = "Letsbook.123";
 
-        $mail->From = "miguel.cachia.b42009@mcast.edu.mt";
+        $mail->From = "letsbook27@gmail.com";
         $mail->AddAddress($maila); #later
-        $mail->Subject = 'Your RoseClothing Password';
+        $mail->Subject = 'tickets';
         $mail->Body =  $mes;
         #$mail->WordWrap = 50;
 

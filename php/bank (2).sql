@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 11, 2018 at 10:08 AM
+-- Generation Time: May 22, 2018 at 03:10 PM
 -- Server version: 10.1.31-MariaDB
 -- PHP Version: 7.2.3
 
@@ -45,8 +45,9 @@ CREATE TABLE `bank` (
 --
 
 INSERT INTO `bank` (`accauntId`, `name`, `surname`, `cod`, `password`, `email`, `value`, `month`, `year`) VALUES
-(1, 'miguel', 'cachia', 1, 1234, 'cachiamiguel@gmail.com', 4260, 6, 2022),
-(2, 'company', 'company', 0, 0, 'company@gmail.com', 910, 12, 2028);
+(1, 'miguel', 'cachia', 1, 1234, 'cachiamiguel@gmail.com', 4145, 6, 2022),
+(2, 'company', 'company', 0, 0, 'company@gmail.com', 1025, 12, 2028),
+(3, 'test', 'test', 4, 4, 'tes@gmail.com', 0, 2, 2020);
 
 --
 -- Indexes for dumped tables
@@ -66,7 +67,7 @@ ALTER TABLE `bank`
 -- AUTO_INCREMENT for table `bank`
 --
 ALTER TABLE `bank`
-  MODIFY `accauntId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `accauntId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

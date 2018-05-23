@@ -29,22 +29,7 @@
       <li class="nav-item">
         <a class="nav-link" href="#">About</a>
       </li>
-       <li>
-          <div class="dropdown">
-  <button class="btn btn-dark" style="background-color#424242 ;"
-     data-toggle="dropdown"  >
-    Event Type Serch
-  </button>
-  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-   <?php
-      $typeq="select DISTINCT typeName from eventtypes INNER JOIN EVENT ON event.type = eventtypes.typeId";
-       $typer =mysqli_query($conn, $typeq)or die ("Error in query" . mysqli_error($conn));
-      while($row = mysqli_fetch_assoc($typer)) {
-    echo'<a class="dropdown-item" href="typeserch.php?type='.$row[typeName].'">'.$row[typeName].'</a>';
-        } ?>
-  </div>
-</div>
-      </li>
+
 
     </ul>
     

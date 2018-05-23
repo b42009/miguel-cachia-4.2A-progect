@@ -1,4 +1,5 @@
 <?php
+error_reporting(0);
 $conn = mysqli_connect('localhost', 'root', '', 'events') or die('Cannot connect to db');
 $ticketn=$_GET['ticketn'];
 $date=$_GET['date'];
@@ -27,13 +28,13 @@ if(isset($_POST['submit']))
             $query="INSERT INTO event (name,edate,imagLink,eventDate,addres,type,imgcategory,durationInDays) 
 VALUES ('$name','$edate','$targetfile','$date',' $adres',$tevent,$imagesiz,$duration)";
             if(mysqli_query($conn,$query)){echo"good";}
- echo "efwef";
+
         
         }}}if($ticketn == 0 ){header('Location:http://localhost/workers.php');
                              }else{ 
 
 
-error_reporting(0);
+
     session_start();
 
 $title =explode("-",$name);
@@ -77,7 +78,7 @@ for($i = 1;$i< $n;$i++){
       
          <?php
             if (isset($_SESSION["login"])){
-                 if( $_SESSION["user"] == 'worker'){header('Location:http://localhost/workers.php');}
+                
                 $id=$_SESSION['login'];
                  $logquery = "select clientName from client WHERE clientId =$id ";
     $logresult =mysqli_query($conn, $logquery)or die ("Error in query" . mysqli_error($conn));

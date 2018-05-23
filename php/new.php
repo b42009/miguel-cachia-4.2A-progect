@@ -141,7 +141,7 @@ echo"</div>";
   <ol class="carousel-indicators">
     <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
     <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+ 
   </ol>
   <div class="carousel-inner">
     <div class="carousel-item active">
@@ -150,9 +150,7 @@ echo"</div>";
     <div class="carousel-item">
       <img class="d-block w-100" id="back"  src="uploads/basic2.jpg" alt="Second slide">
     </div>
-    <div class="carousel-item">
-      <img class="d-block w-100" src="uploads/chinisparty.jpg" alt="Third slide">
-    </div>
+   
   </div>
   <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -172,8 +170,10 @@ echo"</div>";
                    
                    
                 echo " <div id='ev' class='col-sm-12 col-md-4 col-lg-2'><a href='http://localhost/showpage.php?id=$row[eventId]&see=1' style:'text-decoration: none'>";
-             
-              echo "<img id='ime' src=$row[imagLink]>";
+             if($row[imagLink] == null){
+               
+                     echo "<img id='ime' src='uploads/noimage.jpg'>";}
+                   else{ echo "<img id='ime' src=$row[imagLink]>";}
               echo "<h4 >$row[name] </h4>";
             echo"<p style = 'color: white;'>$row[eventDate]</p>";    
 
